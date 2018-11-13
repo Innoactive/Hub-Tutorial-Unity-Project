@@ -1,0 +1,26 @@
+﻿{  
+  "replaceUnityLogger": false,
+  "common": {
+    "logging": {
+      "type": "Innoactive.Hub.Logging.Unity.UnityDebugLoggerFactoryAdapter, Innoactive.Hub.Logging.Unity",
+      "args": [
+        {
+          "key": "level",
+          "value": "ALL"
+        },
+        {
+          "key": "showLogName",
+          "value": "true"
+        },
+        {
+          "key": "showDataTime",
+          "value": "true"
+        },
+        {
+          "key": "dateTimeFormat",
+          "value": "HH:mm:ss:fff"
+        }
+      ]
+    }
+  }
+}
