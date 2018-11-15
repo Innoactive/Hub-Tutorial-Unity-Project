@@ -85,7 +85,7 @@ namespace HubTutorial
 
         protected virtual void Awake()
         {
-            // TODO: Initially turn light off and set intial spread angle
+            // TODO Chapter 6: Initially turn light off and set intial spread angle
 
             // In Awake we make sure a light is set...
             if (lightToToggle == null)
@@ -107,7 +107,7 @@ namespace HubTutorial
         /// <param name="spreadAngle">New angle to set</param>
         public void ChangeSpreadAngle(float spreadAngle)
         {
-            // TODO: Set the new spread angle of the light and broadcast new value.
+            // TODO Chapter 6: Set the new spread angle of the light and broadcast new value.
             this.spreadAngle = spreadAngle;
             lightToToggle.spotAngle = spreadAngle;
             if (SpreadChanged != null)
@@ -119,7 +119,7 @@ namespace HubTutorial
         /// <inheritdoc />
         public override void StartUsing(VRTK_InteractUse currentUsingObject = null)
         {
-            // TODO: Toggle the light when object is used.
+            // TODO Chapter 6: Toggle the light when object is used.
             base.StartUsing(currentUsingObject);
 
             logger.Debug("Start using flashlight");
@@ -140,7 +140,7 @@ namespace HubTutorial
         /// <param name="state">New state to be set</param>
         public void SetLightState(bool state)
         {
-            // TODO: Set the new state of the light and broadcast the new state.
+            // TODO Chapter 6: Set the new state of the light and broadcast the new state.
             if (state != IsLightOn)
             {
                 logger.Info("Changing light to " + state);

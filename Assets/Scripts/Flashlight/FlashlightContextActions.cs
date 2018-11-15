@@ -32,7 +32,7 @@ namespace HubTutorial
 
             List<IMenuItem> buttons = new List<IMenuItem>();
 
-            // TODO: Create and add new buttons to increase and decrease flashlight spread angle
+            // TODO Chapter 7: Create and add new buttons to increase and decrease flashlight spread angle
             // using default design defined in the HubSettings and the icons which can be found in the resources folder.
 
             ContextMenuItemDesign design = new ContextMenuItemDesign(HubSettingsManager.Instance.Settings.DefaultContextMenuIconColor);
@@ -49,7 +49,7 @@ namespace HubTutorial
         /// <param name="controller">Reference to the controller events which triggered this method</param>
         private void DecreaseSpread(VRTK_ControllerEvents controller)
         {
-            // TODO: Set new spread angle of flashlight. At least 10.
+            // TODO Chapter 7: Set new spread angle of flashlight. At least 10.
             float newAngle = Mathf.Max(flashlight.SpreadAngle - 5.0f, 10.0f);
             flashlight.ChangeSpreadAngle(newAngle);
         }
@@ -60,7 +60,7 @@ namespace HubTutorial
         /// <param name="controller">Reference to the controller events which triggered this method</param>
         private void IncreaseSpread(VRTK_ControllerEvents controller)
         {
-            // TODO: Set new spread angle of flashlight. At most 120.
+            // TODO Chapter 7: Set new spread angle of flashlight. At most 120.
             float newAngle = Mathf.Min(flashlight.SpreadAngle + 5.0f, 120.0f);
             flashlight.ChangeSpreadAngle(newAngle);
         }

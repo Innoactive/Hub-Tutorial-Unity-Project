@@ -11,7 +11,7 @@ namespace HubTutorial
         /// <inheritdoc />
         public override void ExtendPerisistenceConfig(PersistenceConfiguration config)
         {
-            // TODO: Register flashlight persistence
+            // TODO Chapter 10: Register flashlight persistence
             config.PropertyTranslators.RegisterTranslator(new FlashlightPersistenceTranslator());
         }
     }

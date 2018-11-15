@@ -28,7 +28,7 @@ namespace HubTutorial
         /// <inheritdoc />
         protected override void UpdateComponentFromProperty(FlashlightPersistenceData data, Flashlight component, UnityPersistenceConfiguration config)
         {
-            // TODO: Set values of flashlight according to the retrieved persisted data
+            // TODO Chapter 10: Set values of flashlight according to the retrieved persisted data
             if (data.EnableState != null)
             {
                 component.SetLightState(data.EnableState.Value);
@@ -43,7 +43,7 @@ namespace HubTutorial
         /// <inheritdoc />
         protected override void UpdatePropertyFromComponent(Flashlight component, FlashlightPersistenceData data, UnityPersistenceConfiguration config)
         {
-            // TODO: Set data to persist according to the values of the flashlight
+            // TODO Chapter 10: Set data to persist according to the values of the flashlight
             data.EnableState = component.IsLightOn;
             data.SpreadAngle = component.SpreadAngle;
         }

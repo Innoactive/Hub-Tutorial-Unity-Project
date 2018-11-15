@@ -26,7 +26,7 @@ namespace HubTutorial
         /// </summary>
         private void AddButtons()
         {
-            // TODO: Add three buttons to the menu:
+            // TODO Chapter 8: Add three buttons to the menu:
             // first called "Teleport To 1" which teleports the user to world origin
             // second called "Teleport To 2" which teleports the user to 1, 0, 0
             // third called "Teleport To 3" which teleports the user to 2, 0, 0.
@@ -34,7 +34,7 @@ namespace HubTutorial
             Add(new ButtonItem(new ResourceIcon("Teleport To 2"), controller => TeleportTo(new Vector3(1, 0, 0))));
             Add(new ButtonItem(new ResourceIcon("Teleport To 3"), controller => TeleportTo(new Vector3(2, 0, 0))));
 
-            // TODO: Add a fourth button which opens a custom window showing the current position
+            // TODO Chapter 12: Add a fourth button which opens a custom window showing the current position
             // with text "Show Position" and with the SettingsIcon from the Hub SDK Resources folder.
             Add(new ButtonItem(new ResourceIcon("Show Position", "menu/Icons/SettingsIcon"), ShowCurrentPositionWindow));
         }
@@ -44,7 +44,7 @@ namespace HubTutorial
         /// </summary>
         private void CustomizeWindowFactory()
         {
-            // TODO: Customize background color, text color, color of title text, color of text and border color
+            // TODO Chapter 12: Customize background color, text color, color of title text, color of text and border color
             WindowFactory.Instance.Config.backgroundColor = Color.black;
             WindowFactory.Instance.Config.textColor = Color.white;
             WindowFactory.Instance.Config.titleTextColor = Color.white;
@@ -58,7 +58,7 @@ namespace HubTutorial
         /// <param name="obj"></param>
         private void ShowCurrentPositionWindow(VRTK_ControllerEvents obj)
         {
-            // TODO: Create window with position information
+            // TODO Chapter 12: Create window with position information
             // Also display two buttons, one saying "Okay" which closes the window
             // and one saying "Reset" which teleports the user to world origin (and closes the window)
 
@@ -75,7 +75,7 @@ namespace HubTutorial
         /// <param name="position">Position to teleport to</param>
         private void TeleportTo(Vector3 position)
         {
-            // TODO: Use VRTK methods to teleport the user to given position.
+            // TODO Chapter 8: Use VRTK methods to teleport the user to given position.
 
             VRTK_BasicTeleport teleporter = UnityEngine.Object.FindObjectOfType<VRTK_BasicTeleport>();
             Transform playArea = VRTK_DeviceFinder.PlayAreaTransform();

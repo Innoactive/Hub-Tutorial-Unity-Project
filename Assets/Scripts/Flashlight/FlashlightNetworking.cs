@@ -46,7 +46,7 @@ namespace HubTutorial
 
             public LightStateChangedCommand(FlashlightNetworking flashlight, bool lightState)
             {
-                // TODO: Set public fields accordingly.
+                // TODO Chapter 11: Set public fields accordingly.
                 FlashlightReference = new GameObjectReference(flashlight);
                 LightState = lightState;
             }
@@ -54,13 +54,13 @@ namespace HubTutorial
             /// <inheritdoc />
             public override void Execute(bool isLocal)
             {
-                // TODO: Implement execution to set new state
+                // TODO Chapter 11: Implement execution to set new state
                 FlashlightReference.Get(UpdateTarget);
             }
 
             private void UpdateTarget(GameObject target)
             {
-                // TODO: Update the state of your flashlight
+                // TODO Chapter 11: Update the state of your flashlight
                 FlashlightNetworking flashlight = target.GetComponent<FlashlightNetworking>();
                 flashlight.RemoteChangeLightState(LightState);
             }
@@ -71,7 +71,7 @@ namespace HubTutorial
         {
             flashlight = GetComponent<Flashlight>();
 
-            // TODO: Subscribe to events
+            // TODO Chapter 11: Subscribe to events
 
             flashlight.LightStateChanged += FlashlightStateChanged;
             flashlight.SpreadChanged += FlashlightSpreadChanged;
@@ -79,7 +79,7 @@ namespace HubTutorial
 
         private void OnDisable()
         {
-            // TODO: Unsubscribe to events to avoid errors when object is deleted
+            // TODO Chapter 11: Unsubscribe to events to avoid errors when object is deleted
 
             flashlight.LightStateChanged -= FlashlightStateChanged;
             flashlight.SpreadChanged -= FlashlightSpreadChanged;
@@ -92,7 +92,7 @@ namespace HubTutorial
         /// <param name="args">Arguments which hold information about the current spread angle</param>
         private void FlashlightSpreadChanged(object sender, Flashlight.SpreadChangedEventArgs args)
         {
-            // TODO: Change spread angle for all other users using the photon RPC call.
+            // TODO Chapter 11: Change spread angle for all other users using the photon RPC call.
             if (recursionLockActive == false)
             {
                 photonView.RPC("RemoteSpreadChanged", PhotonTargets.Others, args.NewSpread);
@@ -106,7 +106,7 @@ namespace HubTutorial
         /// <param name="args">Arguments which hold information about the current state</param>
         private void FlashlightStateChanged(object sender, Flashlight.LightStateChangedEventArgs args)
         {
-            // TODO: Change state of light for all other users using HubCommand.
+            // TODO Chapter 11: Change state of light for all other users using HubCommand.
             if (recursionLockActive == false)
             {
                 new LightStateChangedCommand(this, args.NewState).Execute();

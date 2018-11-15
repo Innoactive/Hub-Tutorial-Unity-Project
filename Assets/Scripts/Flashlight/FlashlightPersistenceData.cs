@@ -12,7 +12,7 @@ namespace HubTutorial
         // protocol version to ensure correct versions - increment whenever you change the object definition
         public new const uint protocolVersion = PersistentProperty.PropData.protocolVersion + 1;
 
-        // TODO: Create unique property type, constructor and data fields that need to be persisted.
+        // TODO Chapter 10: Create unique property type, constructor and data fields that need to be persisted.
 
         public const string propertyType = "Flashlight";
 
