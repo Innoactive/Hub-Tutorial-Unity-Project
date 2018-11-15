@@ -35,7 +35,7 @@ namespace HubTutorial
             Add(new ButtonItem(new ResourceIcon("Teleport To 3"), controller => TeleportTo(new Vector3(2, 0, 0))));
 
             // TODO: Add a fourth button which opens a custom window showing the current position
-            // with text "Show Position" and with the SettingsIcon from the Resources folder.
+            // with text "Show Position" and with the SettingsIcon from the Hub SDK Resources folder.
             Add(new ButtonItem(new ResourceIcon("Show Position", "menu/Icons/SettingsIcon"), ShowCurrentPositionWindow));
         }
 
