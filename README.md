@@ -164,7 +164,7 @@ The Hub SDK will be imported into _Assets/Extensions_ which is also what we reco
 
 ### Importing Steam VR
 
-Download and import Steam VR version 1.2.3 from https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/1.2.3. We recommend moving the Steam VR folder into Extensions, right next to the Hub SDK.
+Download and import _Steam VR_ version 1.2.3 from https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/1.2.3. We recommend moving the Steam VR folder into _Assets/Extensions_, right next to the Hub SDK.
 
 __Important__: Steam VR version 2 which is available on the Asset Store is not supported by VRTK 3.3.0 as currently used in the _Innoactive Hub SDK_.
 
