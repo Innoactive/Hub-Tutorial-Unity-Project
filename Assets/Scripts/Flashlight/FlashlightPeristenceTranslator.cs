@@ -12,7 +12,8 @@ namespace HubTutorial
         {
             get
             {
-                return FlashlightPersistenceData.propertyType;
+                // TODO Chapter 10: Return property type of the persistent flashlight data.
+                return null;
             }
         }
 
@@ -28,24 +29,13 @@ namespace HubTutorial
         /// <inheritdoc />
         protected override void UpdateComponentFromProperty(FlashlightPersistenceData data, Flashlight component, UnityPersistenceConfiguration config)
         {
-            // TODO Chapter 10: Set values of flashlight according to the retrieved persisted data
-            if (data.EnableState != null)
-            {
-                component.SetLightState(data.EnableState.Value);
-            }
-
-            if (data.SpreadAngle != null)
-            {
-                component.ChangeSpreadAngle(data.SpreadAngle.Value);
-            }
+            // TODO Chapter 10: Set values of flashlight according to the retrieved persisted data.
         }
 
         /// <inheritdoc />
         protected override void UpdatePropertyFromComponent(Flashlight component, FlashlightPersistenceData data, UnityPersistenceConfiguration config)
         {
-            // TODO Chapter 10: Set data to persist according to the values of the flashlight
-            data.EnableState = component.IsLightOn;
-            data.SpreadAngle = component.SpreadAngle;
+            // TODO Chapter 10: Set data to persist according to the values of the flashlight.
         }
     }
 }

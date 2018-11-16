@@ -85,20 +85,7 @@ namespace HubTutorial
 
         protected virtual void Awake()
         {
-            // TODO Chapter 6: Initially turn light off and set intial spread angle
-
-            // In Awake we make sure a light is set...
-            if (lightToToggle == null)
-            {
-                logger.Error("No light assigned!");
-            }
-            else
-            {
-                lightToToggle.enabled = false;
-            }
-
-            // ...and also broadcast the initial spread angle.
-            ChangeSpreadAngle(spreadAngle);
+            // TODO Chapter 6: Initially turn light off and set intial spread angle.
         }
 
         /// <summary>
@@ -108,22 +95,12 @@ namespace HubTutorial
         public void ChangeSpreadAngle(float spreadAngle)
         {
             // TODO Chapter 6: Set the new spread angle of the light and broadcast new value.
-            this.spreadAngle = spreadAngle;
-            lightToToggle.spotAngle = spreadAngle;
-            if (SpreadChanged != null)
-            {
-                SpreadChanged.Invoke(this, new SpreadChangedEventArgs(spreadAngle));
-            }
         }
 
         /// <inheritdoc />
         public override void StartUsing(VRTK_InteractUse currentUsingObject = null)
         {
             // TODO Chapter 6: Toggle the light when object is used.
-            base.StartUsing(currentUsingObject);
-
-            logger.Debug("Start using flashlight");
-            ToggleLight();
         }
 
         /// <summary>
@@ -141,15 +118,6 @@ namespace HubTutorial
         public void SetLightState(bool state)
         {
             // TODO Chapter 6: Set the new state of the light and broadcast the new state.
-            if (state != IsLightOn)
-            {
-                logger.Info("Changing light to " + state);
-                lightToToggle.enabled = state;
-                if (LightStateChanged != null)
-                {
-                    LightStateChanged.Invoke(this, new LightStateChangedEventArgs(state));
-                }
-            }
         }
     }
 }
