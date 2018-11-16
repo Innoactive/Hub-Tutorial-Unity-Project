@@ -4,7 +4,7 @@ This repository provides a step-by-step guide to start developing with the _Inno
 
 You will learn how to setup your Unity project with the _Innoactive Hub_ and create Unity scenes, populate them with interactable objects and your own tools and how to persist them. Furthermore, we cover multiplayer capabilities, our extendable XML menu as well as the context menu and many more features.
 
-The tutorial is split into chapters, where every chapter builds upon the previous ones. We do not want you to just read code but learn how to use the _Hub_ by implementing yourself. Therefore, we provide stub code in every chapter and an explanation on what to do. Just checkout the branch of your next chapter and follow the instructions. Every chapter also has a "completed"-branch which is our suggested solution. So if you struggle just checkout the completed branch and go on from there. The completed state is also the basis for the next chapter.
+The tutorial is split into chapters, where every chapter builds upon the previous ones. We do not want you to just read code but learn how to use the _Hub_ by implementing yourself. Therefore, we provide stub code in (almost) every chapter and an explanation on what to do. Just follow the instructions of each chatper. Most chapters also have a branch which includes our suggested solution.
 
 The tutorial is currently based on version **3.3.2**, but will be kept up to date in the future - and also works for previous versions.
 
@@ -152,8 +152,6 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 ## <a name="Chapter1"></a>**Chapter 1** Setup Unity project
 
-_branch: Chapter_1/Setup_Unity_Project_
-
 After opening the Unity project you will find some folders like Materials, Models, Prefabs etc. in your project structure. You can ignore these for now.
 
 ### Importing Innoactive Hub SDK
@@ -166,7 +164,7 @@ The Hub SDK will be imported into _Assets/Extensions_ which is also what we reco
 
 Download and import _Steam VR_ version 1.2.3 from https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/1.2.3. We recommend moving the Steam VR folder into _Assets/Extensions_, right next to the Hub SDK.
 
-__Important__: Steam VR version 2 which is available on the Asset Store is not supported by VRTK 3.3.0 as currently used in the _Innoactive Hub SDK_.
+**Important**: Steam VR version 2 which is available on the Asset Store is not supported by VRTK 3.3.0 as currently used in the _Innoactive Hub SDK_.
 
 After the Hub SDK as well as Steam VR is imported we take care of the following error (if it is shown):
 
@@ -184,6 +182,45 @@ The _Hub Client Credentials_ are your personal credentials to access the backend
 
 As mentioned before Multi User is based on _Photon_. To configure your multi user settings we use another config file for this which you can also find in _Hub-Tutorial-Unity-Project/Config_ (after you clicked on save in the SDK Wizard). For now multi user is turned off but will be explained in Chapter 11.
 
-So for now you can just enter your _Hub Client Credentials_ and click on save on the bottom of the _Hub SDK Wizard_. The rest is handled for you for now. Just to be save you should check your _Photon Settings_ in _Hub-Tutorial-Unity-Project/Config/photon-config.json_ and make sure _hosting_ is set to _"OfflineMode"_. 
+So for now just enter your _Hub Client Credentials_ and click on save on the bottom of the _Hub SDK Wizard_. The rest is handled for you. Just to be save you should check your _Photon Settings_ in _Hub-Tutorial-Unity-Project/Config/photon-config.json_ and make sure _hosting_ is set to _"OfflineMode"_.
 
 ## <a name="Chapter2"></a>**Chapter 2** Setup Unity scene
+
+Open the scene _TutorialScene_ in your projects _Scene_ folder. This is simply a newly created standard Unity scene.
+
+Since we are developing a Virtual Reality application based on _VRTK_ start by removing the _Main Camera_ in the scene and save. We will not need the standard camera.
+
+Next we setup the scene so we can use all features of the _Innoactive Hub_. We took over this process for you to make sure you have everything you need and are good to go. Clicking ```Innoactive > Hub > Setup > Setup Current Scene as Hub Scene``` populates your scene with a bunch of GameObjects which we briefly explain.
+
+### Components
+**[HUB-BOOTSTRAP]** is responsible for scene initialization - handles setup of persistence and multi-user, and loading of the correct space (especially for multi-user sessions).
+
+**[HUB-MULTIUSER]** is responsible for managing multi-user sessions.
+
+**[HUB-PERSISTENCE]** handles storing and restoring scene states (i.e. saving/loading).
+
+**[HUB-LOGIN_CHECK]** ensures that a connection to the _Innoactive Hub_ backend is possible. If not, it will redirect to a login scene.
+
+**[HUB-DEBUG_UI]** provides a Debug Info overlay when pressing Ctrl+G.
+
+**[HUB-VR-SUPERVISOR-CLIENT]** allows connecting to the _Innoactive Hub Launcher_, allowing to switch to different VR applications.
+
+**[HUB-MAINTHREAD_DISPATCHER]** provides required components for threading.
+
+**[HUB-PLAYER-SETUP-MANAGER]** is responsible for setting up the cameras. This includes but is not limited to disabling the HMD if so selected in the player-config.json as well as enabling / disabling the high-resolution spectator view (also configured via the player-config.json) which shows an interpolated first person view in the native resolution of the attached monitor.
+
+**[HUB-MENU-SETUP]** allows configuration of the menu to use, and also allows configuring the user menu.
+
+**[VRTK_Setup]** manages the run-time setup and configuration of VR cameras and interactions.
+
+<br>
+
+Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-SUPERVISOR-CLIENT]** for now. We will come back to those later.
+
+**Note**: Setting up the scene before importing _Steam VR_ might mess up [VRTK_Setup]!
+
+### Environment
+
+To make your scene a less empty space add a simple floor. You can find one in the _Prefabs_ folder and drag it into the scene.
+
+_Find solution in branch: Chapter_2/Setup_Unity_Scene_
