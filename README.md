@@ -203,7 +203,7 @@ Next we setup the scene so we can use all features of the _Innoactive Hub_. We t
 
 **[HUB-DEBUG_UI]** provides a Debug Info overlay when pressing Ctrl+G.
 
-**[HUB-VR-SUPERVISOR-CLIENT]** allows connecting to the _Innoactive Hub Launcher_, allowing to switch to different VR applications.
+**[HUB-VR-LAUNCHER-CLIENT]** allows connecting to the _Innoactive Hub Launcher_, allowing to switch to different VR applications.
 
 **[HUB-MAINTHREAD_DISPATCHER]** provides required components for threading.
 
@@ -215,12 +215,10 @@ Next we setup the scene so we can use all features of the _Innoactive Hub_. We t
 
 <br>
 
-Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-SUPERVISOR-CLIENT]** for now. We will come back to those later.
+Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will come back to those later.
 
 **Note**: Setting up the scene before importing _Steam VR_ might mess up [VRTK_Setup]!
 
 ### Environment
 
 To make your scene a less empty space add a simple floor. You can find one in the _Prefabs_ folder and drag it into the scene.
-
-_Find solution in branch: Chapter_2/Setup_Unity_Scene_
