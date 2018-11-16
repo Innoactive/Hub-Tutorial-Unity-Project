@@ -20,7 +20,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 # Table of contents
 
-&nbsp; **Chapter 1** Setup Unity project
+&nbsp; [**Chapter 1** Setup Unity project](#Chapter1)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.1** Importing dependencies
 
@@ -150,7 +150,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **14.1** Setup a spectator
 
 
-## **Chapter 1** Setup Unity project
+## <a name="Chapter1"></a>**Chapter 1** Setup Unity project
 
 _branch: Chapter_1/Setup_Unity_Project_
 
