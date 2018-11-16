@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TODO Chapter 8: Include menu id and extend the Default Hub Main Menu -->
+<MenuBundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="https://hub.innoactive.de/menubundle"
+            id="TutorialMenu" extends="Hub">
+
+<!-- TODO Chapter 8: Add your created Custom Menu to the Main Menu -->
+    <Menu id="MainMenu" extends="Hub.MainMenu">
+        <MenuItem id="CustomMenuLink" extends="Hub.DefaultLink">
+            <Behaviour>
+                <Data key="provider">TutorialScene.CustomMenu</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">CustomMenu</Data>
+                <Data key="icon">menu/Icons/SpacesIcon</Data>
+            </Content>
+        </MenuItem>
+    </Menu>
+
+<!-- TODO Chapter 8: Add your flashlight to the Tools Menu -->
+    <Menu id="ToolsMenu" extends="Hub.ToolsMenu" replaces="Hub.ToolsMenu">
+        <MenuItem id="Flashlight" extends="Hub.DefaultResourceSpawnButton" placeFirst="true">
+            <Data key="Behaviour.resource">Prefabs/Flashlight</Data>
+            <Data key="Content.text">Flashlight</Data>
+            <Data key="Content.icon">Prefabs/FlashlightThumbnail</Data>
+        </MenuItem>
+        <MenuItem id="Scanner" extends="Hub.DefaultResourceSpawnButton" placeFirst="true">
+            <Data key="Behaviour.resource">Prefabs/Scanner</Data>
+            <Data key="Content.text">Scanner</Data>
+            <Data key="Content.icon">Prefabs/ScannerThumbnail</Data>
+        </MenuItem>
+    </Menu>
+
+<!-- TODO Chapter 10: Create new Spaces Menu which includes
+        - Switching to TutorialScene
+        - Switching to TutorialScene2
+        - Load TutorialScene (you can use Icon_Menu_Download as icon)
+        - Reset TutorialScene (you can use HomeIcon as icon)
+-->
+
+    <Menu id="SpacesMenu" extends="Hub.SpacesMenu" replaces="Hub.SpacesMenu">
+        <MenuItem id="SwitchToScene1" extends="Hub.DefaultButton">
+			<Condition type="Innoactive.Hub.UI.EnvironmentCondition">
+                <Data key="hide-in-environments">TutorialScene</Data>
+            </Condition>
+            <Behaviour type="Innoactive.Hub.UI.CommandBehaviour">
+                <Data key="command-type">Innoactive.Hub.Commands.NavigationActionCommand</Data>
+                <Data key="action-type">LoadLastRevisionOfUnityScene</Data>
+                <Data key="scene-or-app-id">TutorialScene</Data>
+                <Data key="is-local-command">true</Data>
+                <Data key="auto-save-leaving-space">false</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">Switch to Scene 1</Data>
+            </Content>
+        </MenuItem>
+		<MenuItem id="SwitchToScene2" extends="Hub.DefaultButton">
+			<Condition type="Innoactive.Hub.UI.EnvironmentCondition">
+                <Data key="hide-in-environments">TutorialScene2</Data>
+            </Condition>
+            <Behaviour type="Innoactive.Hub.UI.CommandBehaviour">
+                <Data key="command-type">Innoactive.Hub.Commands.NavigationActionCommand</Data>
+                <Data key="action-type">LoadLastRevisionOfUnityScene</Data>
+                <Data key="scene-or-app-id">TutorialScene2</Data>
+                <Data key="is-local-command">true</Data>
+                <Data key="auto-save-leaving-space">false</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">Switch to Scene 2</Data>
+            </Content>
+        </MenuItem>
+        <MenuItem id="Load" extends="Hub.DefaultButton">
+            <Condition type="Innoactive.Hub.UI.LoggedInToHubBackendCondition"/>
+            <Behaviour type="Innoactive.Hub.UI.CommandBehaviour">
+                <Data key="command-type">Innoactive.Hub.Commands.NavigationActionCommand</Data>
+                <Data key="action-type">LoadLastRevisionOfUnityScene</Data>
+                <Data key="scene-or-app-id">TutorialScene</Data>
+                <Data key="is-local-command">true</Data>
+                <Data key="auto-save-leaving-space">false</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">Load</Data>
+                <Data key="icon">menu/Icons/Icon_Menu_Download</Data>
+            </Content>
+        </MenuItem>
+        <MenuItem id="Reset" extends="Hub.DefaultButton">
+            <Condition type="Innoactive.Hub.UI.LoggedInToHubBackendCondition"/>
+            <Behaviour type="Innoactive.Hub.UI.CommandBehaviour">
+                <Data key="command-type">Innoactive.Hub.Commands.NavigationActionCommand</Data>
+                <Data key="action-type">LoadLocalUnityScene</Data>
+                <Data key="scene-or-app-id">TutorialScene</Data>
+                <Data key="is-local-command">true</Data>
+                <Data key="auto-save-leaving-space">false</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">RestartScene</Data>
+                <Data key="icon">menu/Icons/HomeIcon</Data>
+            </Content>
+        </MenuItem>
+    </Menu>
+</MenuBundle>
