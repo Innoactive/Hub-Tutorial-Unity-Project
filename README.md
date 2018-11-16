@@ -29,7 +29,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.3** Photon Settings
 
 
-&nbsp; **Chapter 2** Setup Unity scene
+&nbsp; [**Chapter 2** Setup Unity scene](#Chapter2)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **2.1** Prepare scene
 
@@ -184,4 +184,6 @@ The _Hub Client Credentials_ are your personal credentials to access the backend
 
 As mentioned before Multi User is based on _Photon_. To configure your multi user settings we use another config file for this which you can also find in _Hub-Tutorial-Unity-Project/Config_ (after you clicked on save in the SDK Wizard). For now multi user is turned off but will be explained in Chapter 11.
 
-So for now you can just enter your _Hub Client Credentials_ and click on save on the bottom of the _Hub SDK Wizard_. The rest is handled for you for now.
+So for now you can just enter your _Hub Client Credentials_ and click on save on the bottom of the _Hub SDK Wizard_. The rest is handled for you for now. Just to be save you should check your _Photon Settings_ in _Hub-Tutorial-Unity-Project/Config/photon-config.json_ and make sure _hosting_ is set to _"OfflineMode"_. 
+
+## <a name="Chapter2"></a>**Chapter 2** Setup Unity scene
