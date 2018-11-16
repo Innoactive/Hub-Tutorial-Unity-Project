@@ -11,7 +11,7 @@ namespace HubTutorial
     /// </summary>
     public class Flashlight : InteractableObject
     {
-        // Logger to get sufficient log information
+        // Logger to get sufficient log information.
         private static readonly Common.Logging.ILog logger = Innoactive.Hub.Logging.LogManager.GetLogger<Flashlight>();
 
         #region Events
