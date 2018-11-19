@@ -40,7 +40,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **2.4** Basic environment
 
 
-&nbsp; **Chapter 3** Explore the basics
+&nbsp; [**Chapter 3** Explore the basics](#Chapter3)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **3.1** Teleporter
 
@@ -222,3 +222,21 @@ Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will 
 ### Environment
 
 To make your scene a less empty space add a simple floor. You can find one in the _Prefabs_ folder and drag it into the scene.
+
+## <a name="Chapter3"></a>**Chapter 3** Explore the basics
+
+This chapter is all about exploring the basic features of the _Innoactive Hub_ and will show you what is possible even without writing a single line of code. Start the application by clicking the Play button in Unity. 
+
+First we cover the teleporter, since we all know getting around a virtual space does not work with just walking. We assume you are using a _HTC Vive_ - button configuration may vary between HMDs. Press the Trigger (with your index finger) to show the teleporter and release to teleport to the circled area. Teleport around the floor a bit to get used to it.
+
+Next let's focus on one of the core features. Touching the Touchpad will open the _Main Menu_. You will see different categories and can navigate through the menu by swiping right, left, up and down on the touchpad. Navigate to Tools and spawn a Pencil tool by selecting it and pressing the Touchpad.
+
+The menu grants you access to all kinds of Assets, like Tools, 3D Objects, Images, Videos, PDFs, other Scenes and many more. You can change and extend the menu as you like which will be covered in a later chapter.
+
+After you spawned the pen you can grab it by touching it (it will get highlighted) and then pressing the grab button on the side of your Vive Controller. We included an optional smart grab functionality which is turned on by default. You can either grab an object by keeping the grab button pressed or by quickly clicking the grab button. Try it out and see the difference. By clicking the grab button again you will release the object.
+
+Using an object is as simple as grabbing one. So first grab the pen again, if you released it before, and now use the Trigger to draw some lines in your virtual space. You will draw as long as you keep the Trigger pressed. 
+
+Next to the Main Menu, which is a global menu, exists the object-based _Context Menu_. You can open an object's Context Menu by either touching or grabbing it and then touching the Touchpad of your controller. Besides default features like deleting and turning gravity on you can add object specific behavior. For example you can change the pen's color, so newly drawn strokes will have a different color. Try it by deleting a previously drawn line and then drawing a new one in another color.
+
+Just play around with the menu and spawned objects and see what you can do with the different things. For instance spawn a basic object from the objects menu, change it's color and physics and use bi-manual scaling to make it bigger and smaller (grab it with both hands and move the hands apart). Furthermore, you can change your own representation in VR by changing your avatar in the Avatar menu section. It's also possible to create your own avatar which is a more advanced topic and will not be covered in this tutorial.
