@@ -262,5 +262,5 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 **_HeadsetCollisionFade_** with the added VRTK_HeadsetCollision and HeadsetFade and set the _Mode_ to _FADE_WHEN_INSIDE_COLLIDER_
 
 <p align="center">
-  <src="https://github.com/Innoactive/Hub-Tutorial-Unity-Project/blob/feature/basic-with-todos/Documentation/Images/Chapter4_HeadsetFade.png">
+  <img width="385" height="581" src="https://github.com/Innoactive/Hub-Tutorial-Unity-Project/blob/feature/basic-with-todos/Documentation/Images/Chapter4_HeadsetFade.png">
 </p>
