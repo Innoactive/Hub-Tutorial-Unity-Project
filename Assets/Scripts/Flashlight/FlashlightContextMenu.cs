@@ -1,5 +1,4 @@
-﻿using Innoactive.Hub.Settings;
-using Innoactive.Hub.UI;
+﻿using Innoactive.Hub.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
