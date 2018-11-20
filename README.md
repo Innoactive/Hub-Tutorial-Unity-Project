@@ -64,7 +64,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **4.2** Restrict areas
 
 
-&nbsp; **Chapter 5** Create interactable objects
+&nbsp; [**Chapter 5** Create interactable objects](#Chapter5)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **5.1** Basic interactable objects
 
@@ -268,3 +268,29 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 </p>
 
 **Solution:** Find the populated scene in _ChapterSolutions/Chapter-4_Get-Around-Your-Scene.unitypackage_.
+
+## <a name="Chapter5"></a>**Chapter 5** Create interactable objects**
+
+After we set up a basic scene where you can move around, this chapter covers the process of adding new interactable objects. The goal is to have an interactable wooden box in the scene which can be grabbed, highlighted, scaled and snapped to a pre-defined drop zone. Everything without a single line of code!
+
+We start by creating the interactable box. Drop the _WoodenBox_ prefab into the scene. Now we have to add some components.
+
+**_Rigidbody_** with Drag and Angular Drag set to 3 and gravity turned off. Needed to use some physics on the object.
+
+**_InteractableObject_** with IsGrabbable set to true, so we can actually grab the object.
+
+**_VRTK_FixedJointGrabAttach_** with PrecisionGrab set to true. This allows us to grab the object at the exact position and not snap it to the controller.
+
+**_VRTK_InteractHaptics_** with Strength On Touch and Duration On Touch both set to 0.1. This will give some feedback when we touch the object. 
+
+**_VRTK_AxisScaleGrabAction_** with uniform scaling turned to true. This allows us to scale the object through bi-manual grabbing.
+
+Finally rename the object to _InteractableWoodenBox_ and save it as a prefab for later use. Run the application and see how you can now manipulate your interactable object.
+
+Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _WoodenboxDropZone_, assign it a _BoxCollider_ with center (0, 1.375, 0) and size (0.492, 0.33, 0.684), which is 1.2 times the size of the collider of the wooden box. Additionally, assign a _SnapDropZone_ component to the object and set Snap Duration to 0.5 and Hihglight Always Active to true. 
+
+Now you need to add a prefab which is shown as highlight object for the snapzone. Simply duplicate the WoodenBox prefab, rename it to _HighlightWoodenBox_ and assign the _WoodenboxHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the WoodenboxDropZone choose the newly created prefab.
+
+Finally choose colors for the both highlighting (blue) and valid highlighting (green).
+
+**Solution:** Find all created prefabs and the populated scene in _ChapterSolutions/Chapter-5_Create-Interactable-Objects.unitypackage_.
