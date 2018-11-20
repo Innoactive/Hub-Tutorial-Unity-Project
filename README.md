@@ -57,7 +57,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 [//]: # (Additional goodies includes bi manual scaling and changing avatar representation as well as exploring other tools)
 
 
-&nbsp; **Chapter 4** Get around your scene
+&nbsp; [**Chapter 4** Get around your scene](#Chapter4)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **4.1** Restrict teleporter
 
@@ -240,3 +240,25 @@ Using an object is as simple as grabbing one. So first grab the pen again, if yo
 Next to the Main Menu, which is a global menu, exists the object-based _Context Menu_. You can open an object's Context Menu by either touching or grabbing it and then touching the Touchpad of your controller. Besides default features like deleting and turning gravity on you can add object specific behavior. For example you can change the pen's color, so newly drawn strokes will have a different color. Try it by deleting a previously drawn line and then drawing a new one in another color.
 
 Just play around with the menu and spawned objects and see what you can do with the different things. For instance spawn a basic object from the objects menu, change it's color and physics and use bi-manual scaling to make it bigger and smaller (grab it with both hands and move the hands apart). Furthermore, you can change your own representation in VR by changing your avatar in the Avatar menu section. It's also possible to create your own avatar which is a more advanced topic and will not be covered in this tutorial.
+
+## <a name="Chapter4"></a>**Chapter 4** Get around your scene
+
+As briefly mentioned in the previous chapter using the teleporter is your way to get around the scene. But often it is necessary to restrict the user from going everywhere in the scene.
+
+Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand ontop of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements.
+
+Sometimes instead of just restricting a user to access a certain area it is needed to hide what they can see. Keep in mind that people in Virtual Reality can walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just (physically) walks right through it they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this we simply fade out the user's view. 
+
+Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_ place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_. This is important! For reference, we placed our _Prohibited Zone_ to (-8, 0, 0) and scaled the added BoxCollider to (8, 10, 25). Additionally, add the _FadeOutViewInCollider_ script to the prohibited zone and change it's layer to _IgnoreRaycast_.
+
+Now make usage of VRTK logic to be aware when the user is in the prohibited zone. Create a new GameObject under ```[VRTK_Setup] > [VRTK_Scripts]``` called _HeadsetCollisionFade_. And add the following components with the specific settings:
+
+**_VRTK_PolicyList_** with Include, only check Scripts and as element _FadeOutWhenInCollider_ (which we added to the prohibited zone).
+
+**_VRTK_HeadsetCollision_** with a collider radius of 0.001 and the just added PolicyList.
+
+**_VRTK_HeadsetFade_** 
+
+**_HeadsetCollisionFade_** with the added VRTK_HeadsetCollision and HeadsetFade and set the _Mode_ to _FADE_WHEN_INSIDE_COLLIDER_
+
+[alt text](Documentation/Images/Chapter4_HeadsetFade "HeadsetFadeSetup")
