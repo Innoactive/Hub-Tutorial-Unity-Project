@@ -71,7 +71,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **5.2** Snap and drop zones
 
 
-&nbsp; **Chapter 6** Flashlight: Create custom tool
+&nbsp; [**Chapter 6** Flashlight: Create custom tool](#Chapter6)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **6.1** Create interactable flashlight
 
@@ -294,3 +294,21 @@ Now you need to add a prefab which is shown as highlight object for the snap zon
 Finally choose colors for the both highlighting (blue) and valid highlighting (green). Run the application and see what happens when you grab your box, move it close to the snap zone and release it when marked as valid.
 
 **Solution:** Find all created prefabs and the populated scene in _ChapterSolutions/Chapter-5_Create-Interactable-Objects.unitypackage_.
+
+## <a name="Chapter6"></a>**Chapter 6** Flashlight: Create custom tool
+
+In chapter 3 you learned how to use the pen and some other tools which are already included in the _Innoactive Hub SDK_. In this chapter you will develop your first custom tool - a flashlight - and make use of the context menu. This will require your first lines of code.
+
+Drop the already prepared flashlight prefab into the scene and make it interactable, just like in the previous chapter. Add Rigidbody, InteractableObject and VRTK_FixedJointgrabAttach, but instead of VRTK_AxisScaleGrabAction add VRTK_SwapControllerGrabAction, since we do not need scaling but want to swap between the grabbing hands. This time you also do not need VRTK_InteractHaptics necesseraly.
+
+Add a SpotLight component to the Flashlight, position it properly and change the color to make it a slight yellow. Run the application, grab the light and move around. You just created your first _stupid_ tool.
+
+Now add some logic. Open up the _Flashlight_ script in the folder _Scripts_. Notice how it inherits from _InteractableObject_, so all we do is extend the already attached InteractableObject to give it more functionality but still keep interaction consistent between all objects.
+
+**Note:** You will find TODOs in the already prepared scripts which describe how and where you need to add logic. Therefore, this written documentation will be kept a bit shorter but the intended behavior will be described.
+
+The flashlight should be turned off from the beginning and the size/spread angle of the spotlight should be set to it's initial value as set in the Unity Editor. When the tool is used the light is supposed to be turned on. We also want the spread angle to be adjustable.
+
+When you are done implementing the logic switch back to Unity and exchange the InteractableObject script with the new Flashlight script. Enable grabbable, usable and hold button to use to make your tool interactable. Set your spot light as Light to Toggle, too.
+
+**Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-5_Create-Interactable-Objects.unitypackage_.
