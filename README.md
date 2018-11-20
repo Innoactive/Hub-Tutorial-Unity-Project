@@ -78,14 +78,14 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **6.2** Add logic to your tool
 
 
-&nbsp; **Chapter 7** Extend context menu
+&nbsp; **Chapter 7** Use context menu
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **7.1** Default context actions
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **7.2** Custom context actions
 
 
-&nbsp; **Chapter 8** Extend main menu 
+&nbsp; **Chapter 8** Use main menu 
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **8.1** Create your own menu
 
@@ -311,4 +311,20 @@ The flashlight should be turned off from the beginning and the size/spread angle
 
 When you are done implementing the logic, switch back to Unity and exchange the InteractableObject script with the new Flashlight script on the flashlight GameObject. Enable grabbable, usable and hold button to use to make your tool interactable. Set your spot light as Light to Toggle, too.
 
-**Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-5_Create-Interactable-Objects.unitypackage_.
+**Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-6_Create-Custom-Tool.unitypackage_.
+
+## <a name="Chapter7"></a>**Chapter 7** Use context menu
+
+As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based context menu.
+
+First give the default context actions a look and add the _DefaultContextActions_ component to your flashlight. Disable Use, Scale, Clone and Align, which we do not need. You will see now that those default actions are shown in the context menu of the flashlight.
+
+Open the Hub-Settings which were created in chapter 1. Here you can change the default color of your menu items for all objects and the default context actions for objects spawned from the menu.
+
+After making sure all default actions are working, let's take care of customizing the context menu. Open up the _FlashlightContextMenu_ script and go through the ToDo's. Notice that the menu inherits _IContextMenuAction_ and has a priority field. The priority defines the position of the action within the menu. 
+
+The desired look are two new added buttons with the default design. One button to increase and one to decrease the spread angle of the light. Additionally, the spread angle should be capped at a maximum and minimum value.
+
+Finally, add the script to the flashlight object.
+
+**Solution:** Find all created prefabs and the populated scene in _ChapterSolutions/Chapter-7_Use-Context-Menu.unitypackage_.
