@@ -217,11 +217,13 @@ Next we setup the scene so we can use all features of the _Innoactive Hub_. We t
 
 Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will come back to those later.
 
-**Note**: Setting up the scene before importing _Steam VR_ might mess up [VRTK_Setup]!
+**Note:** Setting up the scene before importing _Steam VR_ might mess up [VRTK_Setup]!
 
 ### Environment
 
 To make your scene a less empty space add a simple floor. You can find one in the _Prefabs_ folder and drag it into the scene.
+
+**Solution:** Find the initially setup scene in _ChapterSolutions/Chapter-2_Setup-Unity-Scene.unitypackage_.
 
 ## <a name="Chapter3"></a>**Chapter 3** Explore the basics
 
@@ -249,11 +251,11 @@ Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We ob
 
 Sometimes instead of just restricting a user to access a certain area it is needed to hide what they can see. Keep in mind that people in Virtual Reality can walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just (physically) walks right through it they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this we simply fade out the user's view. 
 
-Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_ place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_. This is important! For reference, we placed our _Prohibited Zone_ to (-8, 0, 0) and scaled the added BoxCollider to (8, 10, 25). Additionally, add the _FadeOutViewInCollider_ script to the prohibited zone and change it's layer to _IgnoreRaycast_.
+Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_ place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_. This is important! For reference, we placed our _Prohibited Zone_ to (-7, 0, 0) and scaled the added BoxCollider to (7.5, 10, 25). Additionally, add the _FadeOutViewInCollider_ script to the prohibited zone and change it's layer to _IgnoreRaycast_.
 
 Now make usage of VRTK logic to be aware when the user is in the prohibited zone. Create a new GameObject under ```[VRTK_Setup] > [VRTK_Scripts]``` called _HeadsetCollisionFade_. And add the following components with the specific settings:
 
-**_VRTK_PolicyList_** with Include, only check Scripts and as element _FadeOutWhenInCollider_ (which we added to the prohibited zone).
+**_VRTK_PolicyList_** with Include, only check Scripts and as element _FadeoutViewInCollider_ (which we added to the prohibited zone).
 
 **_VRTK_HeadsetCollision_** with a collider radius of 0.001 and the just added PolicyList.
 
@@ -264,3 +266,5 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 <p align="center">
   <img width="385" height="581" src="./Documentation/Images/Chapter4_HeadsetFade.png">
 </p>
+
+**Solution:** Find the populated scene in _ChapterSolutions/Chapter-4_Get-Around-Your-Scene.unitypackage_.
