@@ -261,4 +261,4 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 
 **_HeadsetCollisionFade_** with the added VRTK_HeadsetCollision and HeadsetFade and set the _Mode_ to _FADE_WHEN_INSIDE_COLLIDER_
 
-[alt text](./Documentation/Images/Chapter4_HeadsetFade "HeadsetFadeSetup")
+[alt text](./Documentation/Images/Chapter4_HeadsetFade.png "HeadsetFadeSetup")
