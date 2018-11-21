@@ -5,14 +5,16 @@
             xmlns="https://hub.innoactive.de/menubundle"
             id="" extends="">
 
-<!-- TODO Chapter 8: Add your created Custom Menu to the Main Menu -->
+<!-- TODO Chapter 8: Create and extend default Hub Main Menu. -->
+
+<!-- TODO Chapter 8: Add your created Custom Menu to the Main Menu. -->
 
 <!-- TODO Chapter 8: Add your flashlight to the Tools Menu with a thumbnail and make sure it is always placed first. -->
 
-<!-- TODO Chapter 10: Create new Spaces Menu which includes
-        - Switching to TutorialScene
-        - Switching to TutorialScene2
-        - Load TutorialScene (you can use Icon_Menu_Download as icon)
-        - Reset TutorialScene (you can use HomeIcon as icon)
+<!-- TODO Chapter 10: Create new Spaces Menu which includes:
+        - Switching to TutorialScene.
+        - Switching to TutorialScene2.
+        - Load TutorialScene (you can use Icon_Menu_Download as icon).
+        - Reset TutorialScene (you can use HomeIcon as icon).
 -->
 </MenuBundle>
