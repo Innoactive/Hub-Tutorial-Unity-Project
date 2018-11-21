@@ -85,7 +85,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **7.2** Custom context actions
 
 
-&nbsp; **Chapter 8** Use main menu 
+&nbsp; [**Chapter 8** Use main menu](#Chapter8)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **8.1** Create your own menu
 
@@ -328,3 +328,19 @@ The desired look are two new added buttons with the default design. One button t
 Finally, add the script to the flashlight object.
 
 **Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-7_Use-Context-Menu.unitypackage_.
+
+## <a name="Chapter8"></a>**Chapter 8** Use main menu
+
+You created now your fully functional tool but as an object in the scene which is always at the same position. The goal is to be able to spawn the flashlight directly from the _Main Menu_ just like all the default tools.
+
+To make the main menu adjustable and extendable we decided on a XML based solution. You can read everything about it in the [_Main Menu Documentation_](http://docs.hub.innoactive.de/articles/menu.html). In this tutorial we will just cover some basic concepts.
+
+You need to create your own menu first. To do this choose ```Innoactive > Hub > Create XML Menu``` to open the menu creation window. The _Menu Bundle ID_ is basically the name of your menu. For this tutorial set it to _TutorialMenu_. You also want to make use of the default _Innoactive Hub_ menu to reduce work and to get the same behaviour. Therefore, leave Inherit from other Menu enabled and choose _Hub_ for Bundle Id and _MainMenu_ for Base Main Menu. This simply, as the name says, inherits from the standard menu and provides a good starting point for you. 
+
+<p align="center">
+  <img width="791" height="579" src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
+</p>
+
+After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference.
+
+The first step of extending the main menu is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a mew folder). We do not need the Default Actions anymore because they are automatically added when the object is spawned from the menu. 
