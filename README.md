@@ -327,4 +327,4 @@ The desired look are two new added buttons with the default design. One button t
 
 Finally, add the script to the flashlight object.
 
-**Solution:** Find all created prefabs and the populated scene in _ChapterSolutions/Chapter-7_Use-Context-Menu.unitypackage_.
+**Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-7_Use-Context-Menu.unitypackage_.
