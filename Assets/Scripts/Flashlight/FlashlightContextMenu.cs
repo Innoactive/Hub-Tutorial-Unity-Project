@@ -26,7 +26,7 @@ namespace HubTutorial
         /// </summary>
         [SerializeField]
         [Tooltip("Priority of this context action.")]
-        private int priority = 0;
+        private int priority = 128;
 
         protected virtual void Awake()
         {
