@@ -78,7 +78,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **6.2** Add logic to your tool
 
 
-&nbsp; **Chapter 7** Use context menu
+&nbsp; [**Chapter 7** Use context menu](#Chapter7)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **7.1** Default context actions
 
