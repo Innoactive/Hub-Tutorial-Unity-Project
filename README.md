@@ -93,9 +93,9 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **8.3** Custom menu actions
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **8.4** Complex menu actions
+[//]: # (&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **8.4** Complex menu actions)
 
-[//]: # (Maybe show how to make an application quit button or something more stupid but similar)
+[//]: # (8.4 Maybe show how to make an application quit button or something more stupid but similar. Do this in a future iteration.)
 
 
 &nbsp; **Chapter 9** _Innoactive Hub_ Backend Setup
@@ -341,14 +341,16 @@ You need to create your own menu first. To do this choose ```Innoactive > Hub > 
   <img width="75%" src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
 </p>
 
-After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference.
+After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the TutorialMenu.xml, thus you actually need to provide this. You can leave it empty but need to provide this section.
 
-The first step of extending the menu is to actually include the Main Menu section. Create a new _Menu_ within your XML description and give it the Id _MainMenu_ and extend the Hub.MainMenu. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the TutorialMenu.xml, thus you actually need to provide this. You can leave it empty but need to provide this section.
-
-The next step to really include new things in your custom menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the Default Actions anymore because they are automatically added when the object is spawned from the menu. 
+The first step to extending your custom menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the Default Actions anymore because they are automatically added when the object is spawned from the menu. You can delete the flashlight in the scene now.
 
 To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ Flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -35, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
 
-Now open your _TutorialMenu.xml_ and the _TutorialMenu_ToDos.xml_ to see what is to do to show the flashlight in the menu and actually spawn it on click. We also suggest opening the _HubDefaultMenu.xml_ for reference.
+Now open your _TutorialMenu.xml_ and the _TutorialMenu_ToDos.xml_ to see what is to do to show the flashlight in the menu and actually spawn it on click. As said before, we also suggest opening the _HubDefaultMenu.xml_ for reference.
 
-First extend the _ToolsMenu_ section by extending as well as replacing the _Hub.ToolsMenu_ to keep all its elements but to add new ones. Then add a new _MenuItem_ which is actually a _DefaultResourceSpawnButton_ with an Id and make sure it is always placed first. Furthermore, include the flashlight resource, a description text ("Flashlight") and the thumbnail. This will do exactly what it says: Create a button with the thumbnail as icon and the text as _title_ which spawns the created prefab on click. _Hint:_ Keep in mind, you can always peek into the implementation of the default menu.
+First extend the _ToolsMenu_ section by extending as well as replacing the _Hub.ToolsMenu_ to keep all its elements but to be able to add new ones. Then add a new _MenuItem_ which is actually a _DefaultResourceSpawnButton_ with an Id and make sure it is always placed first. Furthermore, include the flashlight resource, a description text ("Flashlight") and the thumbnail. This will do exactly what it says: Create a button with the thumbnail as icon and the text as _title_ which spawns the created prefab on click. _Hint:_ Keep in mind, you can always peek into the implementation of the default menu.
+
+Run your application and try out your new tool spawned from the Tools section of your menu. You will also see that it has all context menu actions.
+
+You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which teleports the user to certain positions in the scene. Open the _CustomTeleportMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for chapter 8 and ignore the ones from chapter 12 which we will tackle later on to extend this feature.
