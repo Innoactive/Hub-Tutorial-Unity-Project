@@ -379,7 +379,7 @@ First and recommended option is to open up the SDK Setup Wizard again and fill i
 
 Enable the _[HUB-LOGIN-CHECK]_ object in your scene and open up the Hub-Settings in your project. Include your provided reality into the _Editor Reality Id_ field.
 
-> A reality is one _unique_ version of your application. You can kinda see realities as parallel universes. While in Reality A you have three pens, a flashlight and some drawings floating around, in reality B you only moved your box right next to the wall and have a measuring tape to check the distance to your table. Both realities build upon the same basic scene/application and exist next to each other but the states of the objects are different. This allows multiple people to work within the same application without interfering with each other.
+> A reality is one _unique_ version of your application. You can kinda see realities as parallel universes. While in Reality A you have three pens, a flashlight and some drawings floating around, in reality B you only moved your box right next to the wall and have a measuring tape to check the distance to your table. Both realities build upon the same basic scene/application and exist next to each other but the states of the objects are different. This allows multiple people to work within the same application without interfering with each other. Realities do not know each other and within one application you cannot jump between realities!
 
 Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images, sounds and/or videos from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
 
@@ -411,4 +411,20 @@ Save your XML file and start your application. Choose _Load_ to load the previou
 
 ### Make tools persistent
 
-As you might have seen your flashlight tool keeps it position but not its last set state and spread angle.
+As you might have seen your flashlight tool keeps it position but not its last set state and spread angle. This might not be a huge issue for the flashlight but for more complex objects/tools or for colored things it can be vital.
+
+To make a tool persistent it needs its own _PropertyData_ as well as _Translator_. Open the _FlashlightPersistenceData_ script which already inherits from _PersistentProperty.PropData_ and carries the _DataContract-Attribute_. In here you actually just have to create nullable types that you want to persist within your flashlight, so your state and your spread angle. Both get the _DataMember-Attribute_ with unique names. As you can see _PropertyData_ is more or less a container which holds the information you want to persist.
+
+The translator does the actual work. Edit your _FlashlightPersistenceTranslator_ which in this case is a _SingleComponentPropertyTranslator_ with the _FlashlightPropertyData_ as well as the _Flashlight_ component. Start by returning the correct _PropertyTypeName_ which is defined in the data.
+
+The other two ToDo's are, simply said, one to get the data from the object and save it (_UpdatePropertyFromComponent_) and the other to load the object data which was saved before (_UpdateComponentFromProperty_). So in _UpdatePropertyFromComponent_ set the property data to the components current values and in _UpdateComponentFromProperty_ set the current values to the saved property data.
+
+This now handles the storing and loading of data in general but will not be called by the _PersistenceManager_ yet. We first have to register the translator. Open the _TutorialPersistenceExtension_ script which inherits from _PersistenceConfigExtension_ and add the _FlashlightPersistenceTranslator_ to the config by registering it. You need to register every tool and object you want to persist and which required a _PersistenceTranslator_ wihtin the extension.
+
+The last step to have your flashlight persistet is to add the implemented extension to the [HUB_PERSISTENCE] object in your tutorial scene (as well as in the Login scene).
+
+### Jump between scenes
+
+The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Switch to Tutorial 1". Do the same for the scene _TutorialScene2_ which you can find in the same folder. 
+
+[//]: # (TODO: Create unity packages for each of these sub chapters and include tutorial 2 as well as some icons for everything.)
