@@ -98,7 +98,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 [//]: # (8.4 Maybe show how to make an application quit button or something more stupid but similar. Do this in a future iteration.)
 
 
-&nbsp; **Chapter 9** _Innoactive Hub_ Backend Setup
+&nbsp; [**Chapter 9** _Innoactive Hub_ Backend Setup](#Chapter9)
 
 &nbsp; &nbsp; _**Note:** You can only complete this chapter if you have access to the Innoactive Hub Backend_
 
@@ -111,7 +111,9 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **9.4** Access and populate your Web Management Console
 
 
-&nbsp; **Chapter 10** Persistence
+&nbsp; [**Chapter 10** Persistence](#Chapter10)
+
+&nbsp; &nbsp; _**Note:** You can only complete this chapter if you have access to the Innoactive Hub Backend_
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **10.1** Save and load space
 
@@ -170,7 +172,7 @@ After the Hub SDK as well as Steam VR is imported we take care of the following 
 
 ```Assets/Extensions/hub-sdk/SDK/Utils/UnityDotNetCheck/UnityDotNetCheck.cs(6,0): error CS1029: #error: 'This Unity project is configured for .Net 2.0 subset, but the Innoactive Hub SDK requires full .Net functionality. Please go to "PlayerSettings > Other Settings" and change Api Compatibility Level to .Net 2.0'```
 
-Simply do what it says and go to the Unity PlayerSettings and change the Api Compatibility Level in Other Settings from _.Net 2.0 Subset_ to _.Net 2.0_.
+Go to the Unity PlayerSettings and change the Api Compatibility Level in Other Settings from _.Net 2.0 Subset_ to _.Net 2.0_.
 
 ### Hub SDK Wizard
 
@@ -364,3 +366,49 @@ The logic of the menu is now done but you will not see it in the application yet
 Run the application move around and open your menu. You will see a new entry at the end of the list. Navigate to it and make use of the three newly added menu functions.
 
 **Solution:** Find the implemented script, menu and the cleaned scene in _ChapterSolutions/Chapter-8_Use-Main-Menu.unitypackage_.
+
+## <a name="Chapter9"></a>**Chapter 9** _Innoactive Hub_ Backend Setup
+
+This chapter is all about setting up your _Innoactive Hub_ Backend and how to make use of it.
+
+_Note:_ Get your credentials or you will not have access to the _Web Management Console_.
+
+There are two ways to configure your client settings, the settings you need to make to have actual access. 
+
+First and recommended option is to open up the SDK Setup Wizard again and fill in the _Hub Client Credentials_. You get the Hub URL, the client Id as well as the secret from your _Innoactive_ contact person. The values you enter here will be copied into the client config file (```Project > Config > client-config.json```) which is also the second option. You can just include everything in this file directly without making use of the Wizard.
+
+Enable the _[HUB-LOGIN-CHECK]_ object in your scene and open up the Hub-Settings in your project. Include your provided reality into the _Editor Reality Id_ field.
+
+> A reality is one _unique_ version of your application. You can kinda see realities as parallel universes. While in Reality A you have three pens, a flashlight and some drawings floating around, in reality B you only moved your box right next to the wall and have a measuring tape to check the distance to your table. Both realities build upon the same basic scene/application and exist next to each other but the states of the objects are different. This allows multiple people to work within the same application without interfering with each other.
+
+Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images, sounds and/or videos from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
+
+**Solution:** Find the scene with activated login check in _ChapterSolutions/Chapter-9_Innoactive_Hub_Backend_Setup.unitypackage_. _Note:_ You still need to setup your client config credentials by hand.
+
+## <a name="Chapter10"></a>**Chapter 10** Persistence
+
+Persistence is the idea of loading and saving states of the current environment and one of the most important concepts of the _Innoactive Hub_. We call those states _Spaces_ or more precisely _persistent Spaces_. You can see a space as a save state/game of your current environment. Therefore, a space can be saved as well as loaded and will be uploaded to the _Innoactive Hub_ Backend to use at a different time.
+
+To get into more detail, a space has objects and those objects have properties. Each property defines a special state of the object like location, physics, color, grabbability etc. By default all spawned objects are persisted. Thereby, the _PersistenceManager_ acts as the central component. You can save a space explicitly through the menu. By default a space is saved when you leave your environment or quit your application.
+
+_Note:_ Find more information in our official [documentation](http://docs.hub.innoactive.de/articles/persistence.html).
+
+### Save, Load and Reset
+
+Loading is done by the _SceneNavigationManager_ which has actions to load a certain space by Id but typically the last saved space is loaded. While being in multi-user every user in the same room loads the same space.
+
+So far for the theory, in practice the goal of this chapter is to first save a space, see how it shows up in the WMC and then load it again via the menu. Additionally, the flashlight from chapter 6 will be persisted and you will learn how to switch between scenes without losing the changes made before.
+
+Let's start by spawning some tools and moving them around. Then open the menu and save your space. Check your WMC and see how it shows up there. But we cannot load it yet. 
+
+As said before, the loading will be done through a new menu button. Start editing your _TutorialMenu_ XML description from chapter 8 and include _SpacesMenu_ which extends _Hub.SpacesMenu_, just like we did with the _ToolsMenu_ before. Include two new buttons, one for actually loading a space and one for resetting your current space to the original state. 
+
+First the loading: Create a default button with Id _Load_. As a condition make sure the user is logged into the _Innoactive Hub_ Backend. This makes the button only visible if the condition is met. Next add a _CommandBehaviour_ with a _NavigationActionCommand_ and loading the last revision of the given Unity scene as action. For scene use the name of your scene (_TutorialScene_). Additionally, make sure the command is only executed locally, so not every other user is forced into the loaded space, and it is not automatically saved when the space is left. As description for this icon use _Load_ and as icon the _Icon_Menu_Download_ which you can find at ```Menu > Icons > Icon_Menu_Download```.
+
+Resetting your space is similar to loading. Again, create a new default button with the same condition and the same command behaviour and the same command type. Make sure it is also only executed for the local player, in the same scene as before and do not save when leaving the space. But for the action make sure this time only the local unity scene is loaded. Call this button _Reset_ and give it the _HomeIcon_ which you can find in the same folder as the other one.
+
+Save your XML file and start your application. Choose _Load_ to load the previously saved state and you will see that your objects will be where you left them before. Now reset your space, load again, reset again and finally save. Now your empty space is your last saved space.
+
+### Make tools persistent
+
+As you might have seen your flashlight tool keeps it position but not its last set state and spread angle.
