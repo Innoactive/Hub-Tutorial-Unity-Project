@@ -354,3 +354,13 @@ First extend the _ToolsMenu_ section by extending as well as replacing the _Hub.
 Run your application and try out your new tool spawned from the Tools section of your menu. You will also see that it has all context menu actions.
 
 You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which teleports the user to certain positions in the scene. Open the _CustomTeleportMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for chapter 8 and ignore the ones from chapter 12 which we will tackle later on to extend this feature.
+
+To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text but without any specific icon and for the action make use of the _TeleportTo_ method which you need to implement next.
+
+_TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method.
+
+The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the SpacesIcon (```Menu > Icons > SpacesIcon```) for now.
+
+Run the application move around and open your menu. You will see a new entry at the end of the list. Navigate to it and make use of the three newly added menu functions.
+
+**Solution:** Find the implemented script, menu and the cleaned scene in _ChapterSolutions/Chapter-8_Use-Main-Menu.unitypackage_.
