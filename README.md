@@ -4,7 +4,7 @@ This repository provides a step-by-step guide to start developing with the _Inno
 
 You will learn how to setup your Unity project with the _Innoactive Hub_ and create Unity scenes, populate them with interactable objects and your own tools and how to persist them. Furthermore, we cover multiplayer capabilities, our extendable XML menu as well as the context menu and many more features.
 
-The tutorial is split into chapters, where every chapter builds upon the previous ones. We do not want you to just read code but learn how to use the _Hub_ by implementing yourself. Therefore, we provide stub code in (almost) every chapter and an explanation on what to do. Just follow the instructions of each chatper. Most chapters also have a branch which includes our suggested solution.
+The tutorial is split into chapters, where every chapter builds upon the previous ones. We do not want you to just read code but learn how to use the _Hub_ by implementing yourself. Therefore, we provide stub code in (almost) every chapter and an explanation on what to do. Just follow the instructions of each chatper. Most chapters also come with a unitypackage which includes our suggested solution.
 
 The tutorial is currently based on version **3.3.2**, but will be kept up to date in the future - and also works for previous versions.
 
