@@ -289,7 +289,7 @@ We start by creating the interactable box. Drop the _WoodenBox_ prefab into the 
 
 Finally rename the object to _InteractableWoodenBox_ and save it as a prefab for later use. Run the application and see how you can now manipulate your interactable object.
 
-Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _WoodenboxDropZone_, assign it a _BoxCollider_ with center (0, 1.375, 0) and size (0.492, 0.33, 0.684), which is 1.2 times the size of the collider of the wooden box. Place the snap drop zone ontop of the table. Additionally, assign a _SnapDropZone_ component to the object and set Snap Duration to 0.5 and Highlight Always Active to true. 
+Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _WoodenboxDropZone_, assign it a _BoxCollider_ with center (0, 0.1375, 0) and size (0.492, 0.33, 0.684), which is 1.2 times the size of the collider of the wooden box. Place the snap drop zone ontop of the table, for example at (-0.8, 0.775, -2). Additionally, assign a _SnapDropZone_ component to the object and set Snap Duration to 0.5 and Highlight Always Active to true. 
 
 Now you need to add a prefab which is shown as highlight object for the snap zone. Simply duplicate the _WoodenBox_ prefab, rename it to _HighlightWoodenBox_ and assign the _WoodenboxHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the WoodenboxDropZone choose the newly created prefab.
 
