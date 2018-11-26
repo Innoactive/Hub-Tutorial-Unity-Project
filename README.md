@@ -437,6 +437,12 @@ The last thing covered in this chapter is how to switch scenes. You can change s
 
 Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to muli-user sessions!
 
+The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabalities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_). Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
+
+Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworking_ component to the _WoodenboxDropZone_, run the application and see how other people can manipulate objects within the same scene.
+
+When you spawn your flashlight you can see that it automatically gets a _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
+
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
 This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The _WindowFactory_ will save you a lot of time and also keeps your messages consistent.
