@@ -217,7 +217,7 @@ Next we setup the scene so we can use all features of the _Innoactive Hub_. We t
 
 <br>
 
-Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will come back to those later.
+**IMPORTANT:** Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will come back to those later. **If you keep the login check enabled it will try to connect to the backend which is covered in chapter 9.**
 
 **Note:** Setting up the scene before importing _Steam VR_ might mess up [VRTK_Setup]!
 
@@ -470,3 +470,6 @@ The next step is to customize your controllers to see the difference. As mention
 Run your application and teleport around to see the difference. To also make use of the new controllers in the _TutorialScene2_ change the setup accordingly.
 
 **Solution:** Find the new controller prefabs, config and updated scene in _ChapterSolutions/Chapter-13_Customize-Controllers.unitypackage_.
+
+## <a name="Chapter14"></a>**Chapter 14** Spectator
+
