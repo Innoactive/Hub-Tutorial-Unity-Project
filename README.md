@@ -217,7 +217,7 @@ Next we setup the scene so we can use all features of the _Innoactive Hub_. We t
 
 <br>
 
-**IMPORTANT:** Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will come back to those later. **If you keep the login check enabled it will try to connect to the backend which is covered in chapter 9.**
+**IMPORTANT:** Disable **[HUB-LOGIN_CHECK]** and **[HUB-VR-LAUNCHER-CLIENT]** for now. We will come back to those later.
 
 **Note:** Setting up the scene before importing _Steam VR_ might mess up [VRTK_Setup]!
 
