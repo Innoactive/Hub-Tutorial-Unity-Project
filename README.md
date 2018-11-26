@@ -305,7 +305,7 @@ Drop the already prepared flashlight prefab into the scene and make it interacta
 
 Add a SpotLight component to the Flashlight, position it properly at the tip of the flashlight and change the color to make it a slight yellow. Run the application, grab the light and move around. You just created your first _stupid_ tool.
 
-Now add some logic. Open up the _Flashlight_ script in the folder _Scripts_. Notice how it inherits from _InteractableObject_, so all we do is extend the already attached InteractableObject to give it more functionality but still keep interaction consistent between all objects.
+Now add some logic. Open up the _Flashlight_ script in ```Assets > Scripts > Flashlight```. Notice how it inherits from _InteractableObject_, so all we do is extend the already attached InteractableObject to give it more functionality but still keep interaction consistent between all objects.
 
 **Note:** You will find TODOs in the already prepared scripts which describe how and where you need to add logic. Therefore, this written documentation will be kept a bit shorter but the intended behavior will be described. We left some basic concepts out but make sure to go through the complete script to understand the logic completely. The solution package will have the fully implemented script.
 
@@ -343,17 +343,21 @@ You need to create your own menu first. To do this choose ```Innoactive > Hub > 
   <img width="75%" src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
 </p>
 
-After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the TutorialMenu.xml, thus you actually need to provide this. You can leave it empty but need to provide this section.
+After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the _TutorialMenu.xml_, thus you actually need to provide this. You can leave it empty but need to provide this section.
 
-The first step to extending your custom menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the Default Actions anymore because they are automatically added when the object is spawned from the menu. You can delete the flashlight in the scene now.
+### Extend the menu
 
-To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ Flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -35, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
+The first step to extending your menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the default actions anymore because they are automatically added when the object is spawned from the menu. You can delete the flashlight in the scene now.
+
+To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -35, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
 
 Now open your _TutorialMenu.xml_ and the _TutorialMenu_ToDos.xml_ to see what is to do to show the flashlight in the menu and actually spawn it on click. As said before, we also suggest opening the _HubDefaultMenu.xml_ for reference.
 
 First extend the _ToolsMenu_ section by extending as well as replacing the _Hub.ToolsMenu_ to keep all its elements but to be able to add new ones. Then add a new _MenuItem_ which is actually a _DefaultResourceSpawnButton_ with an Id and make sure it is always placed first. Furthermore, include the flashlight resource, a description text ("Flashlight") and the thumbnail. This will do exactly what it says: Create a button with the thumbnail as icon and the text as _title_ which spawns the created prefab on click. _Hint:_ Keep in mind, you can always peek into the implementation of the default menu.
 
 Run your application and try out your new tool spawned from the Tools section of your menu. You will also see that it has all context menu actions.
+
+### Custom menus
 
 You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which teleports the user to certain positions in the scene. Open the _CustomTeleportMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for chapter 8 and ignore the ones from chapter 12 which we will tackle later on to extend this feature.
 
@@ -371,7 +375,7 @@ Run the application move around and open your menu. You will see a new entry at 
 
 This chapter is all about setting up your _Innoactive Hub_ Backend and how to make use of it.
 
-_Note:_ Get your credentials or you will not have access to the _Web Management Console_.
+_Note:_ Get your client credentials from your _Innoactive_ contact person or you will not have access to the _Web Management Console_.
 
 There are two ways to configure your client settings, the settings you need to make to have actual access. 
 
@@ -393,7 +397,7 @@ To get into more detail, a space has objects and those objects have properties. 
 
 _Note:_ Find more information in our official [documentation](http://docs.hub.innoactive.de/articles/persistence.html).
 
-### Save, Load and Reset
+### Save, load and reset
 
 Loading is done by the _SceneNavigationManager_ which has actions to load a certain space by Id but typically the last saved space is loaded. While being in multi-user every user in the same room loads the same space.
 
@@ -435,13 +439,13 @@ The last thing covered in this chapter is how to switch scenes. You can change s
 
 ## <a name="Chapter11"></a>**Chapter 11** Multi-User
 
-Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to muli-user sessions!
+Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to multi-user sessions!
 
-The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabalities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_). Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
+The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabilities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_). Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
 
 Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworking_ component to the _WoodenboxDropZone_, run the application and see how other people can manipulate objects within the same scene.
 
-When you spawn your flashlight you can see that it automatically gets a _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
+When you spawn your flashlight you can see that it automatically gets an _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
 
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
@@ -457,15 +461,15 @@ You might not like the current color scheme or it does not fit your company's st
 
 **Solution:** Find the updated script in _ChapterSolutions/Chapter-12_Window-System.unitypackage_.
 
-## <a name="Chapter13"></a>**Chapter 13** Customize Controllers
+## <a name="Chapter13"></a>**Chapter 13** Customize controllers
 
 Currently when you start an application, controllers with default behavior (default _Innoactive Hub_ configuration) are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. In some cases you might not want to show a menu allow only the trigger to be used or change the appearance of the teleporter or even want your left controller to be different from your right one.
 
 In this chapter you will learn how to change the appearance of your teleporter to the default _VRTK_ look.
 
-You find configured controller prefabs in ```Assets > Extensions > hub-sdk > SDK > Interaction > Controller > Prefabs > Controller```. We assume you are using the _HTC Vive_, so duplicate the _Steam_Vive_LeftController_ as well as the _RightController_, move the copies to ````Assets > Controller``` (create a new folder if needed, the location does not matter though) and rename them to _Tutorial_Vive_LeftController_ and _TutorialVive_RightController_. These will be your new controllers whenever you start the application.
+You find configured controller prefabs in ```Assets > Extensions > hub-sdk > SDK > Interaction > Controller > Prefabs > Controller```. We assume you are using the _HTC Vive_, so duplicate the _Steam_Vive_LeftController_ as well as the _RightController_, move the copies to ```Assets > Controller``` (create a new folder if needed, the location does not matter though) and rename them to _Tutorial_Vive_LeftController_ and _Tutorial_Vive_RightController_. These will be your new controllers whenever you start the application.
 
-We have to add the controllers to the scene to actualy make use of them. Create a new _PrefabControllerConfig_ in a new folder _Config_ within the _Controller_ folder. Do this by right clicking the folder and choosing ```Create > InnoactiveHub > Controller > PrefabControllerConfig```. Rename the newly created _ScriptableObject_ to _TutorialConfig_. Set the name to _Tutorial_ and drag your prefabs into the controller fields. In your hierarchy navigate to ````[VRTK_SETUP] > [VRTK_Scripts] > ControllerConfigChooser```, expand the Configs section of the _ChooseController_ script and replace the config of _Steam VR_ + _HTC Vive_ with your _TutorialControllerConfig_. From now on, whenever you start your application - or to be more precise this scene, since controller configs are in scene not in project scope - your new custom controllers will be loaded.
+We have to add the controllers to the scene to actualy make use of them. Create a new _PrefabControllerConfig_ in a new folder _Config_ within the _Controller_ folder. Do this by right clicking the folder and choosing ```Create > InnoactiveHub > Controller > PrefabControllerConfig```. Rename the newly created _ScriptableObject_ to _TutorialConfig_. Set the name to _Tutorial_ and drag your prefabs into the controller fields. In your hierarchy navigate to ```[VRTK_SETUP] > [VRTK_Scripts] > ControllerConfigChooser```, expand the Configs section of the _ChooseController_ script and replace the config of _Steam VR_ + _HTC Vive_ with your _TutorialControllerConfig_. From now on, whenever you start your application - or to be more precise this scene, since controller configs are in scene not in project scope - your new custom controllers will be loaded.
 
 The next step is to customize your controllers to see the difference. As mentioned before we simply change the appearance of the teleporter. In both of your custom controllers change the _VRTK_BezierPointerRenderer_ of the _TeleportPointer_ child object. On the bottom of the script you find _AppearanceSettings_ which you can replace with the prefabs in ```Assets > Extensions > hub-sdk > Extensions > VRTK > Assets > VRTK > Examples > ExampleResources > SharedResources > Prefabs > AnimatedBezierPointer```.
 
@@ -479,6 +483,6 @@ Run your application and teleport around to see the difference. To also make use
 
 ## <a name="Chapter14"></a>**Chapter 14** Spectator
 
-The _Innoactive Hub_ is intended for business applications. Even though a user will train or plan in VR on their own they might have someone standing next to them without wearing a HMD but monitoring. Therefore, the _Innoactive Hub SDK_ offers the possibility to show what the user sees on a second display via a spectator. By default a spectator camera is created at run-time and shows what the user sees (with some additional information). Just start your application in the Unity Editor and find a _Spectator Camera_ object in your scene. You can customize this spectator camera by setting your own in the _PlayerSetupManager_ in the _[HUB-PLAYER-SETUP-MANAGER]_ in your scene. Usually this is not necessary but possible.
+The _Innoactive Hub_ is intended for business applications. Even though a user will train or plan in VR on their own they might have someone standing next to them without wearing a HMD but monitoring what the user in VR is doing. Therefore, the _Innoactive Hub SDK_ offers the possibility to show what the user sees on a second display via a spectator. By default a spectator camera is created at run-time and shows what the user sees (with some additional information). Just start your application in the Unity Editor and find a _Spectator Camera_ object in your scene. You can customize this spectator camera by setting your own in the _PlayerSetupManager_ in the _[HUB-PLAYER-SETUP-MANAGER]_ in your scene. Usually this is not necessary but the possibility is given.
 
 You can enable and disable this spectator via the _player-config.json_ which you can find in the _Config_ folder of your project. Since this option is included in the configuration files you can also turn it on and off when the application is built. 
