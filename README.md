@@ -409,6 +409,8 @@ Resetting your space is similar to loading. Again, create a new default button w
 
 Save your XML file and start your application. Choose _Load_ to load the previously saved state and you will see that your objects will be where you left them before. Now reset your space, load again, reset again and finally save. Now your empty space is your last saved space.
 
+**Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.1_Persistence_Save-And-Load.unitypackage_.
+
 ### Make tools persistent
 
 As you might have seen your flashlight tool keeps it position but not its last set state and spread angle. This might not be a huge issue for the flashlight but for more complex objects/tools or for colored things it can be vital.
@@ -423,8 +425,10 @@ This now handles the storing and loading of data in general but will not be call
 
 The last step to have your flashlight persistet is to add the implemented extension to the [HUB_PERSISTENCE] object in your tutorial scene (as well as in the Login scene).
 
+**Solution:** Find the implemented scripts and the updated scene in _ChapterSolutions/Chapter-10.2_Persistence_Tools.unitypackage_.
+
 ### Jump between scenes
 
 The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Go to Tutorial 1". Do the same for the scene _TutorialScene2_ which you can find in the same folder. 
 
-[//]: # (TODO: Create unity packages for each of these sub chapters and include tutorial 2 as well as some icons for everything.)
+**Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.3_Persistence_Switching-Scenes.unitypackage_.
