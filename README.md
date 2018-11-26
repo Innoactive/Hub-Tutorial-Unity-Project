@@ -147,7 +147,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **13.2** Controller config and controller config chooser
 
 
-&nbsp; **Chapter 14** Spectator
+&nbsp; [**Chapter 14** Spectator](#Chapter14)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **14.1** Setup a spectator
 
