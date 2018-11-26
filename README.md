@@ -122,7 +122,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **10.3** Scene navigation
 
 
-&nbsp; **Chapter 11** Multi-User
+&nbsp; [**Chapter 11** Multi-User](#Chapter11)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **11.1** Multi-user sessions and Photon config
 
@@ -131,7 +131,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **11.3** Make tools networked
 
 
-&nbsp; **Chapter 12** Windows System
+&nbsp; [**Chapter 12** Window System](#Chapter12)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **12.1** Window Factory
 
@@ -432,3 +432,21 @@ The last step to have your flashlight persistet is to add the implemented extens
 The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Go to Tutorial 1". Do the same for the scene _TutorialScene2_ which you can find in the same folder. 
 
 **Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.3_Persistence_Switching-Scenes.unitypackage_.
+
+## <a name="Chapter11"></a>**Chapter 11** Multi-User
+
+Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to muli-user sessions.
+
+## <a name="Chapter12"></a>**Chapter 12** Window System
+
+This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The _WindowFactory_ will save you a lot of time and also keeps your messages consistent.
+
+To demonstrate how the _WindowFactory_ works, extend your custom teleport menu from chapter 8 by adding a new button which will open a dialog window that shows your current position and lets you reset your position to world origin.
+
+So Step by step, start by opening your _CustomTeleportMenu_ script which still has some ToDo's open. Edit the _ShowCurrentPositionWindow_ method and make use of the _WindowFactory_. Create an actions window with a text tells you your current position and rotation and the title _Current Position_. Additionally, add two buttons. One that says _Okay_ and simply closes the dialog box and one that says _Reset_ and teleports you to the world origin (also closing the box afterwards).
+
+Next give the user the possibility to actually open the window. Add a new button to the custom menu with the _SettingsIcon_ which you can find at ```Menu > Icons > SettingsIcon```, the title _Show Position_ and which opens the previously implemented window. Run your app and try it out by opening your menu and navigating to the teleport menu.
+
+You might not like the current color scheme or it does not fit your company's style. In that case, customize the _WindowFactory_ to your needs. Let's try by settings the background color to black, the text, title and button color to white and the border color to white. Let creativity run wild!
+
+**Solution:** Find the updated script in _ChapterSolutions/Chapter-12_Window-System.unitypackage_. 
