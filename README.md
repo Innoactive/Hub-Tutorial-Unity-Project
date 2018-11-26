@@ -473,3 +473,6 @@ Run your application and teleport around to see the difference. To also make use
 
 ## <a name="Chapter14"></a>**Chapter 14** Spectator
 
+The _Innoactive Hub_ is intended for business applications. Even though a user will train or plan in VR on their own they might have someone standing next to them without wearing a HMD but monitoring. Therefore, the _Innoactive Hub SDK_ offers the possibility to show what the user sees on a second display via a spectator. By default a spectator camera is created at run-time and shows what the user sees (with some additional information). Just start your application in the Unity Editor and find a _Spectator Camera_ object in your scene. You can customize this spectator camera by setting your own in the _PlayerSetupManager_ in the _[HUB-PLAYER-SETUP-MANAGER]_ in your scene. Usually this is not necessary but possible.
+
+You can enable and disable this spectator via the _player-config.json_ which you can find in the _Config_ folder of your project. Since this option is included in the configuration files you can also turn it on and off when the application is built. 
