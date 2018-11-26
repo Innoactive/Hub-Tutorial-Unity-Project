@@ -140,7 +140,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **12.3** Add to menu
 
 
-&nbsp; **Chapter 13** Customize controllers
+&nbsp; [**Chapter 13** Customize Controllers](#Chapter13)
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **13.1** Create new controllers
 
@@ -453,4 +453,16 @@ You might not like the current color scheme or it does not fit your company's st
 
 ## <a name="Chapter13"></a>**Chapter 13** Customize Controllers
 
-Currently when you start an application, controller with default behavior configured by _Innoactive_ are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. 
+Currently when you start an application, controllers with default behavior (default _Innoactive Hub_ configuration) are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. In some cases you might not want to show a menu allow only the trigger to be used or change the appearance of the teleporter or even want your left controller to be different from your right one.
+
+In this chapter you will learn how to change the appearance of your teleporter to the default _VRTK_ look.
+
+You find configured controller prefabs in ```Assets > Extensions > hub-sdk > SDK > Interaction > Controller > Prefabs > Controller```. We assume you are using the _HTC Vive_, so duplicate the _Steam_Vive_LeftController_ as well as the _RightController_, move the copies to ````Assets > Controller``` (create a new folder if needed, the location does not matter though) and rename them to _Tutorial_Vive_LeftController_ and _TutorialVive_RightController_. These will be your new controllers whenever you start the application.
+
+We have to add the controllers to the scene to actualy make use of them. Create a new _PrefabControllerConfig_ in a new folder _Config_ within the _Controller_ folder. Do this by right clicking the folder and choosing ```Create > InnoactiveHub > Controller > PrefabControllerConfig```. Rename the newly created _ScriptableObject_ to _TutorialConfig_. Set the name to _Tutorial_ and drag your prefabs into the controller fields. In your hierarchy navigate to ````[VRTK_SETUP] > [VRTK_Scripts] > ControllerConfigChooser```, expand the Configs section of the _ChooseController_ script and replace the config of _Steam VR_ + _HTC Vive_ with your _TutorialControllerConfig_. From now on, whenever you start your application - or to be more precise this scene, since controller configs are in scene not in project scope - your new custom controllers will be loaded.
+
+The next step is to customize your controllers to see the difference. As mentioned before we simply change the appearance of the teleporter. In both of your custom controllers change the _VRTK_BezierPointerRenderer_ of the _TeleportPointer_ child object. On the bottom of the script you find _AppearanceSettings_ which you can replace with the prefabs in ```Assets > Extensions > hub-sdk > Extensions > VRTK > Assets > VRTK > Examples > ExampleResources > SharedResources > Prefabs > AnimatedBezierPointer```.
+
+Run your application and teleport around to see the difference. To also make use of the new controllers in the _TutorialScene2_ change the setup accordingly.
+
+**Solution:** Find the new controller prefabs, config and updated scene in _ChapterSolutions/Chapter-13_Customize-Controllers.unitypackage_.
