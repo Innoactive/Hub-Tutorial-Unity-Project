@@ -266,7 +266,7 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 **_HeadsetCollisionFade_** with the added VRTK_HeadsetCollision and HeadsetFade and set the _Mode_ to _FADE_WHEN_INSIDE_COLLIDER_.
 
 <p align="center">
-  <img width="385" height="581" src="./Documentation/Images/Chapter4_HeadsetFade.png">
+  <img width="441px" height="577" src="./Documentation/Images/Chapter4_HeadsetFade.png">
 </p>
 
 **Solution:** Find the populated scene in _ChapterSolutions/Chapter-4_Get-Around-Your-Scene.unitypackage_.
@@ -340,7 +340,7 @@ To make the main menu adjustable and extendable we decided on a XML based soluti
 You need to create your own menu first. To do this choose ```Innoactive > Hub > Create XML Menu``` to open the menu creation window. The _Menu Bundle ID_ is basically the name of your menu. For this tutorial set it to _Tutorial_. You also want to make use of the default _Innoactive Hub_ menu to reduce work and to get the same behaviour. Therefore, leave Inherit from other Menu enabled and choose _Hub_ for Bundle Id and _MainMenu_ for Base Main Menu. This simply, as the name says, inherits from the standard menu and provides a good starting point for you. 
 
 <p align="center">
-  <img width="75%" src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
+  <img width="747px" height="614px" src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
 </p>
 
 After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the _TutorialMenu.xml_, thus you actually need to provide this. You can leave it empty but need to provide this section.
