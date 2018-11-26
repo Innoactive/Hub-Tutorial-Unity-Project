@@ -463,6 +463,10 @@ We have to add the controllers to the scene to actualy make use of them. Create 
 
 The next step is to customize your controllers to see the difference. As mentioned before we simply change the appearance of the teleporter. In both of your custom controllers change the _VRTK_BezierPointerRenderer_ of the _TeleportPointer_ child object. On the bottom of the script you find _AppearanceSettings_ which you can replace with the prefabs in ```Assets > Extensions > hub-sdk > Extensions > VRTK > Assets > VRTK > Examples > ExampleResources > SharedResources > Prefabs > AnimatedBezierPointer```.
 
+<p align="center">
+  <img width="75%" src="./Documentation/Images/Chapter13_CustomTeleport.png">
+</p>
+
 Run your application and teleport around to see the difference. To also make use of the new controllers in the _TutorialScene2_ change the setup accordingly.
 
 **Solution:** Find the new controller prefabs, config and updated scene in _ChapterSolutions/Chapter-13_Customize-Controllers.unitypackage_.
