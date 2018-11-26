@@ -361,7 +361,7 @@ To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonIt
 
 _TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method.
 
-The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the SpacesIcon (```Menu > Icons > SpacesIcon```) for now.
+The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the number icons (```Icons > icon_1/2/3```).
 
 Run the application move around and open your menu. You will see a new entry at the end of the list. Navigate to it and make use of the three newly added menu functions.
 
@@ -429,13 +429,13 @@ The last step to have your flashlight persistet is to add the implemented extens
 
 ### Jump between scenes
 
-The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Go to Tutorial 1". Do the same for the scene _TutorialScene2_ which you can find in the same folder. 
+The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Go to Tutorial 1" and use the simple icon with the number 1 again. Do the same for the scene _TutorialScene2_ which you can find in the same folder and is an empty scene just to show how to switch scenes. 
 
 **Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.3_Persistence_Switching-Scenes.unitypackage_.
 
 ## <a name="Chapter11"></a>**Chapter 11** Multi-User
 
-Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to muli-user sessions.
+Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to muli-user sessions!
 
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
@@ -449,4 +449,8 @@ Next give the user the possibility to actually open the window. Add a new button
 
 You might not like the current color scheme or it does not fit your company's style. In that case, customize the _WindowFactory_ to your needs. Let's try by settings the background color to black, the text, title and button color to white and the border color to white. Let creativity run wild!
 
-**Solution:** Find the updated script in _ChapterSolutions/Chapter-12_Window-System.unitypackage_. 
+**Solution:** Find the updated script in _ChapterSolutions/Chapter-12_Window-System.unitypackage_.
+
+## <a name="Chapter13"></a>**Chapter 13** Customize Controllers
+
+Currently when you start an application, controller with default behavior configured by _Innoactive_ are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. 
