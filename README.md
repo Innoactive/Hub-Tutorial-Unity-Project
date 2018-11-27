@@ -403,7 +403,7 @@ Enable the _[HUB-LOGIN-CHECK]_ object in your scene and open up the Hub-Settings
 
 > A reality is one _unique_ version of your application. You can kinda see realities as parallel universes. While in Reality A you have three pens, a flashlight and some drawings floating around, in reality B you only moved your box right next to the wall and have a measuring tape to check the distance to your table. Both realities build upon the same basic scene/application and exist next to each other but the states of the objects are different. This allows multiple people to work within the same application without interfering with each other. Realities do not know each other and within one application you cannot jump between realities!
 
-Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images, sounds and/or videos from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
+Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images or presentations from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
 
 **Solution:** Find the scene with activated login check in _ChapterSolutions/Chapter-9_Innoactive_Hub_Backend_Setup.unitypackage_. _Note:_ You still need to setup your client config credentials by hand.
 
@@ -421,9 +421,9 @@ _Note:_ Find more information in our official [documentation](http://docs.hub.in
 
 Loading is done by the _SceneNavigationManager_ which has actions to load a certain space by Id but typically the last saved space is loaded. While being in multi-user every user in the same room loads the same space.
 
-So far for the theory, in practice the goal of this chapter is to first save a space, see how it shows up in the WMC and then load it again via the menu. Additionally, the flashlight from chapter 6 will be persisted and you will learn how to switch between scenes without losing the changes made before.
+So far for the theory, in practice the goal of this chapter is to first save a space and then load it again via the menu. Additionally, the flashlight from chapter 6 will be persisted and you will learn how to switch between scenes without losing the changes made before.
 
-Let's start by spawning some tools and moving them around. Then open the menu and save your space. Check your WMC and see how it shows up there. But we cannot load it yet. 
+Let's start by spawning some tools and moving them around. Then open the menu and save your space but you cannot load it yet. 
 
 As said before, the loading will be done through a new menu button. Start editing your _TutorialMenu_ XML description from chapter 8 and include _SpacesMenu_ which replaces _Hub.SpacesMenu_, just like with the _ToolsMenu_. Include two new buttons, one for actually loading a space and one for resetting your current space to the original state. 
 
