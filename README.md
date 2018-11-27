@@ -449,6 +449,24 @@ Adjusting an object to make it multi-user ready is quite simple. Add an _Interac
 
 When you spawn your flashlight you can see that it automatically gets an _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
 
+In this tutorial two different ways of implementing networked methods are covered, _RPC_ and _HubCommands_. You usually would just use one but this shows you both possibilities.
+
+First, it is important to know when and what has to be networked and when other users have to be notified. Since it is not necessary to constantly synchronize the current spread angle even though it does not change, subscribe in _OnEnable_ to the flashlight events created in chapter 6 - and obviously unsubscribe _OnDisable_. Within the class you find already two methods which should be called when the appropriate events are fired.
+
+Let's focus on the callback method which handles the spread angle first whic will make use of _Photon's RPC_. In here you can simply make use of the attached _PhotonView_ and call its method _RPC_ with the name of the method to call (in this case "RemoteSpreadChanged"), who is the receiver of this call (only other players, since the local user has already changed the angle) and the new angle which you can get from the passed arguments. That is all you have to do when making use of _Photon_.
+
+Using _HubCommands_ is a bit more complicated. You find the internal class _LightStateChangedCommand_ which inherits from _HubCommand_ within your networked flashlight script. A _HubCommand_ is basically a command which can be configured and then executed for every user.
+
+First implement the constructor and create a new _GameObjectReference_ to the flashlight and also set the light state. _Execute_ will be called for each user and the _Get_ function of your flashlight reference is used to get the _UpdateTarget_ method to eventually change the light state remotely. In _UpdateTarget_ the method _RemoteChangeLightState_ with the new light state has to be called. Back in the callback you just have to create a new _LightStateChangedCommand_ with the proper arguments and execute it.
+
+The two remote methods are kinda similar. The _RemoteSpreadChanged_ method has a _[PunRPC]_ attribute, so it is registered for each user and therefore can be called with _Photon's RPC_ functionality. In here you just have to change the spread angle of the flashlight. The _RemoteChangeLightState_ is more or less the same gets the new light state and simply sets it in the _local_ flashlight. Remember, this method is called within the _HubCommand_ which is passed to every user, so we do not need a _RPC_ attribute here!
+
+As you probably noticed you can get into a nasty recursion, since one user for example changes the spread angle of the flashlight and fires the matching event. Then the networked flashlight makes sure all other users update their flashlights which then triggers the event again and and therefore notifies the _FlashlightNetworking_ again which tries to synchronize its state with the other users. Thus we introduce a simple recursion lock flag which secures that things are only executed when they should. Hence, activate the recursion lock before you update the local flashlight and deactivate it afterwards and ensure that the callbacks are only executed when the recursion lock is inactive.
+
+Finally, add your _FlashlightNetworking_ script to the flashlight prefab and disable _Synchronize Usage_ for testing purposes. Run your application and try your new networked tool.
+
+**Solution:** Find the implemented script and updated prefab in _ChapterSolutions/Chapter-11_Multi-User.unitypackage_.
+
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
 This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The _WindowFactory_ will save you a lot of time and also keeps your messages consistent.
