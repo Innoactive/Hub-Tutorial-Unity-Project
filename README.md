@@ -405,11 +405,11 @@ So far for the theory, in practice the goal of this chapter is to first save a s
 
 Let's start by spawning some tools and moving them around. Then open the menu and save your space. Check your WMC and see how it shows up there. But we cannot load it yet. 
 
-As said before, the loading will be done through a new menu button. Start editing your _TutorialMenu_ XML description from chapter 8 and include _SpacesMenu_ which extends _Hub.SpacesMenu_, just like we did with the _ToolsMenu_ before. Include two new buttons, one for actually loading a space and one for resetting your current space to the original state. 
+As said before, the loading will be done through a new menu button. Start editing your _TutorialMenu_ XML description from chapter 8 and include _SpacesMenu_ which replaces _Hub.SpacesMenu_, just like with the _ToolsMenu_. Include two new buttons, one for actually loading a space and one for resetting your current space to the original state. 
 
 First the loading: Create a default button with Id _Load_. As a condition make sure the user is logged into the _Innoactive Hub_ Backend. This makes the button only visible if the condition is met. Next add a _CommandBehaviour_ with a _NavigationActionCommand_ and loading the last revision of the given Unity scene as action. For scene use the name of your scene (_TutorialScene_). Additionally, make sure the command is only executed locally, so not every other user is forced into the loaded space, and it is not automatically saved when the space is left. As description for this icon use _Load_ and as icon the _Icon_Menu_Download_ which you can find at ```Menu > Icons > Icon_Menu_Download```.
 
-Resetting your space is similar to loading. Again, create a new default button with the same condition and the same command behaviour and the same command type. Make sure it is also only executed for the local player, in the same scene as before and do not save when leaving the space. But for the action make sure this time only the local unity scene is loaded. Call this button _Reset_ and give it the _HomeIcon_ which you can find in the same folder as the other one.
+Resetting your space is similar to loading. Again, create a new default button with the same condition and the same command behaviour and the same command type. Make sure it is also only executed for the local player, in the same scene as before and do not save when leaving the space. But for the action make sure this time only the local unity scene is loaded. Call this button _Reset_ and give it the _HomeIcon_ which you can find in the same folder as the one for loading.
 
 Save your XML file and start your application. Choose _Load_ to load the previously saved state and you will see that your objects will be where you left them before. Now reset your space, load again, reset again and finally save. Now your empty space is your last saved space.
 
@@ -433,6 +433,8 @@ The last step to have your flashlight persistet is to add the implemented extens
 
 ### Jump between scenes
 
+_Note:_ Make sure your _TutorialScene_ as well as _TutorialScene2_ are added to the BuildSettings.
+
 The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Go to Tutorial 1" and use the simple icon with the number 1 again. Do the same for the scene _TutorialScene2_ which you can find in the same folder and is an empty scene just to show how to switch scenes. 
 
 **Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.3_Persistence_Switching-Scenes.unitypackage_.
@@ -443,7 +445,7 @@ Up to now everything so far was in offline mode, so not networked and not intend
 
 The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabilities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_). Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
 
-Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworking_ component to the _WoodenboxDropZone_, run the application and see how other people can manipulate objects within the same scene.
+Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworked_ component to the _WoodenboxDropZone_, run the application and see how other people can manipulate objects within the same scene.
 
 When you spawn your flashlight you can see that it automatically gets an _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
 
