@@ -307,7 +307,7 @@ Add a SpotLight component to the Flashlight, position it properly at the tip of 
 
 Now add some logic. Open up the _Flashlight_ script in ```Assets > Scripts > Flashlight```. Notice how it inherits from _InteractableObject_, so all we do is extend the already attached InteractableObject to give it more functionality but still keep interaction consistent between all objects.
 
-**Note:** You will find TODOs in the already prepared scripts which describe how and where you need to add logic. Therefore, this written documentation will be kept a bit shorter but the intended behavior will be described. We left some basic concepts out but make sure to go through the complete script to understand the logic completely. The solution package will have the fully implemented script.
+**Note:** You will find ToDo's in the already prepared scripts which describe how and where you need to add logic. Therefore, this written documentation will be kept a bit shorter but the intended behavior will be described. We left some basic concepts out but make sure to go through the complete script to understand the logic completely. The solution package will have the fully implemented script.
 
 The flashlight should be turned off from the beginning and the size/spread angle of the spotlight should be set to it's initial value as set in the Unity Editor. When the tool is used the light is supposed to be turned on. We also want the spread angle to be adjustable.
 
@@ -325,7 +325,7 @@ Open the Hub-Settings which were created in chapter 1. Here you can change the d
 
 After making sure all default actions are working, let's take care of customizing the context menu. Open up the _FlashlightContextMenu_ script and go through the ToDo's. Notice that the menu inherits _IContextMenuAction_ and has a priority field. The priority defines the position of the action within the menu. 
 
-The desired look are two new added buttons with the default design. One button to increase and one to decrease the spread angle of the light. Additionally, the spread angle should be capped at a maximum and minimum value.
+The desired look are two new added buttons with the default design. One button to increase and one to decrease the spread angle of the light, you can use the icons we provided in ```Assets > Resources > Icons``` and call the buttons _Decrease Spread_ and _Increase Spread_. Additionally, the spread angle should be capped at a maximum and minimum value.
 
 Finally, add the script to the flashlight object.
 
@@ -337,19 +337,19 @@ You created now your fully functional tool but as an object in the scene which i
 
 To make the main menu adjustable and extendable we decided on a XML based solution. You can read everything about it in the [_Main Menu Documentation_](http://docs.hub.innoactive.de/articles/menu.html). In this tutorial we will just cover some basic concepts.
 
-You need to create your own menu first. To do this choose ```Innoactive > Hub > Create XML Menu``` to open the menu creation window. The _Menu Bundle ID_ is basically the name of your menu. For this tutorial set it to _Tutorial_. You also want to make use of the default _Innoactive Hub_ menu to reduce work and to get the same behaviour. Therefore, leave Inherit from other Menu enabled and choose _Hub_ for Bundle Id and _MainMenu_ for Base Main Menu. This simply, as the name says, inherits from the standard menu and provides a good starting point for you. 
+You need to create your own menu first. To do this choose ```Innoactive > Hub > UI > Create XML Menu``` to open the menu creation window. The _Menu Bundle ID_ is basically the name of your menu. For this tutorial set it to _Tutorial_. You also want to make use of the default _Innoactive Hub_ menu to reduce work and to get the same behaviour. Therefore, leave Inherit from other Menu enabled and choose _Hub_ for Bundle Id and _MainMenu_ for Base Main Menu. This simply, as the name says, inherits from the standard menu and provides a good starting point for you. 
 
 <p align="center">
   <img src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
 </p>
 
-After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the _TutorialMenu.xml_, thus you actually need to provide this. You can leave it empty but need to provide this section.
+After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the default Hub menu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the _TutorialMenu.xml_, thus you actually need to provide this. You can leave it empty but need to provide this section.
 
 ### Extend the menu
 
 The first step to extending your menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the default actions anymore because they are automatically added when the object is spawned from the menu. You can delete the flashlight in the scene now.
 
-To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -35, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
+To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -90, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
 
 Now open your _TutorialMenu.xml_ and the _TutorialMenu_ToDos.xml_ to see what is to do to show the flashlight in the menu and actually spawn it on click. As said before, we also suggest opening the _HubDefaultMenu.xml_ for reference.
 
@@ -361,11 +361,11 @@ Run your application and try out your new tool spawned from the Tools section of
 
 You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which teleports the user to certain positions in the scene. Open the _CustomTeleportMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for chapter 8 and ignore the ones from chapter 12 which we will tackle later on to extend this feature.
 
-To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text but without any specific icon and for the action make use of the _TeleportTo_ method which you need to implement next.
+To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text ("Teleport to 1/2/3) and the icons from ```Assets > Resources > Icons > icon_1/2/3``` and for the action make use of the _TeleportTo_ method which you need to implement next.
 
 _TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method.
 
-The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the number icons (```Icons > icon_1/2/3```).
+The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the spaces icon (```... > menu > Icons > SpacesIcon```).
 
 Run the application move around and open your menu. You will see a new entry at the end of the list. Navigate to it and make use of the three newly added menu functions.
 
