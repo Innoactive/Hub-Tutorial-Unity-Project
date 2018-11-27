@@ -18,6 +18,8 @@ Additionally, Photon as a proven network technology is used to guarantee stable 
 
 Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and access to the _Innoactive Hub Backend_ (optional but recommended).
 
+<div style="page-break-after: always;"></div>
+
 # Table of contents
 
 &nbsp; [**Chapter 1** Setup Unity project](#Chapter1)
@@ -97,7 +99,6 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 [//]: # (8.4 Maybe show how to make an application quit button or something more stupid but similar. Do this in a future iteration.)
 
-
 &nbsp; [**Chapter 9** _Innoactive Hub_ Backend Setup](#Chapter9)
 
 &nbsp; &nbsp; _**Note:** You can only complete this chapter if you have access to the Innoactive Hub Backend_
@@ -151,6 +152,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **14.1** Setup a spectator
 
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter1"></a>**Chapter 1** Setup Unity project
 
@@ -185,6 +187,8 @@ The _Hub Client Credentials_ are your personal credentials to access the backend
 As mentioned before Multi User is based on _Photon_. To configure your multi user settings we use another config file for this which you can also find in _Hub-Tutorial-Unity-Project/Config_ (after you clicked on save in the SDK Wizard). For now multi user is turned off but will be explained in Chapter 11.
 
 So for now just enter your _Hub Client Credentials_ and click on save on the bottom of the _Hub SDK Wizard_. The rest is handled for you. Just to be save you should check your _Photon Settings_ in _Hub-Tutorial-Unity-Project/Config/photon-config.json_ and make sure _hosting_ is set to _"OfflineMode"_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter2"></a>**Chapter 2** Setup Unity scene
 
@@ -227,6 +231,8 @@ To make your scene a less empty space add a simple floor. You can find one in th
 
 **Solution:** Find the initially setup scene in _ChapterSolutions/Chapter-2_Setup-Unity-Scene.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter3"></a>**Chapter 3** Explore the basics
 
 This chapter is all about exploring the basic features of the _Innoactive Hub_ and will show you what is possible even without writing a single line of code. Start the application by clicking the Play button in Unity. 
@@ -244,6 +250,8 @@ Using an object is as simple as grabbing one. So first grab the pen again, if yo
 Next to the Main Menu, which is a global menu, exists the object-based _Context Menu_. You can open an object's Context Menu by either touching or grabbing it and then touching the Touchpad of your controller. Besides default features like deleting and turning gravity on you can add object specific behavior. For example you can change the pen's color, so newly drawn strokes will have a different color. Try it by deleting a previously drawn line and then drawing a new one in another color.
 
 Just play around with the menu and spawned objects and see what you can do with the different things. For instance spawn a basic object from the objects menu, change it's color and physics and use bi-manual scaling to make it bigger and smaller (grab it with both hands and move the hands apart). Furthermore, you can change your own representation in VR by changing your avatar in the Avatar menu section. It's also possible to create your own avatar which is a more advanced topic and will not be covered in this tutorial.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter4"></a>**Chapter 4** Get around your scene
 
@@ -271,6 +279,8 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 
 **Solution:** Find the populated scene in _ChapterSolutions/Chapter-4_Get-Around-Your-Scene.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter5"></a>**Chapter 5** Create interactable objects
 
 After we set up a basic scene where you can move around, this chapter covers the process of adding new interactable objects. The goal is to have an interactable wooden box in the scene which can be grabbed, highlighted, scaled and snapped to a pre-defined drop zone. Everything without a single line of code!
@@ -297,6 +307,8 @@ Finally choose colors for the both highlighting (blue) and valid highlighting (g
 
 **Solution:** Find all created prefabs and the populated scene in _ChapterSolutions/Chapter-5_Create-Interactable-Objects.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter6"></a>**Chapter 6** Flashlight: Create custom tool
 
 In chapter 3 you learned how to use the pen and some other tools which are already included in the _Innoactive Hub SDK_. In this chapter you will develop your first custom tool - a flashlight. This will require your first lines of code.
@@ -315,6 +327,8 @@ When you are done implementing the logic, switch back to Unity and exchange the 
 
 **Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-6_Create-Custom-Tool.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter7"></a>**Chapter 7** Use context menu
 
 As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based context menu.
@@ -330,6 +344,8 @@ The desired look are two new added buttons with the default design. One button t
 Finally, add the script to the flashlight object.
 
 **Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-7_Use-Context-Menu.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter8"></a>**Chapter 8** Use main menu
 
@@ -371,6 +387,8 @@ Run the application move around and open your menu. You will see a new entry at 
 
 **Solution:** Find the implemented script, menu and the cleaned scene in _ChapterSolutions/Chapter-8_Use-Main-Menu.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter9"></a>**Chapter 9** _Innoactive Hub_ Backend Setup
 
 This chapter is all about setting up your _Innoactive Hub_ Backend and how to make use of it.
@@ -388,6 +406,8 @@ Enable the _[HUB-LOGIN-CHECK]_ object in your scene and open up the Hub-Settings
 Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images, sounds and/or videos from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
 
 **Solution:** Find the scene with activated login check in _ChapterSolutions/Chapter-9_Innoactive_Hub_Backend_Setup.unitypackage_. _Note:_ You still need to setup your client config credentials by hand.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter10"></a>**Chapter 10** Persistence
 
@@ -439,6 +459,8 @@ The last thing covered in this chapter is how to switch scenes. You can change s
 
 **Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.3_Persistence_Switching-Scenes.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter11"></a>**Chapter 11** Multi-User
 
 Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to multi-user sessions!
@@ -467,6 +489,8 @@ Finally, add your _FlashlightNetworking_ script to the flashlight prefab and dis
 
 **Solution:** Find the implemented script and updated prefab in _ChapterSolutions/Chapter-11_Multi-User.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
 This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The _WindowFactory_ will save you a lot of time and also keeps your messages consistent.
@@ -480,6 +504,8 @@ Next give the user the possibility to actually open the window. Add a new button
 You might not like the current color scheme or it does not fit your company's style. In that case, customize the _WindowFactory_ to your needs. Let's try by setting the background color to black, the text, title and button color to white and the border color to red. Let creativity run wild!
 
 **Solution:** Find the updated script in _ChapterSolutions/Chapter-12_Window-System.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter13"></a>**Chapter 13** Customize controllers
 
@@ -500,6 +526,8 @@ The next step is to customize your controllers to see the difference. As mention
 Run your application and teleport around to see the difference. To also make use of the new controllers in the _TutorialScene2_ change the setup accordingly.
 
 **Solution:** Find the new controller prefabs, config and updated scene in _ChapterSolutions/Chapter-13_Customize-Controllers.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter14"></a>**Chapter 14** Spectator
 
