@@ -40,7 +40,7 @@ namespace HubTutorial
         /// </summary>
         private void CustomizeWindowFactory()
         {
-            // TODO Chapter 12: Customize background color, text color, color of title text, color of text and border color.
+            // TODO Chapter 12: Customize background color (black), text color, color of title, button text color (all white) and border color (red).
         }
 
         /// <summary>
