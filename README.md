@@ -186,13 +186,15 @@ Go to the Unity PlayerSettings and change the Api Compatibility Level in Other S
 
 After compiling another error _might_ pop-up:
 
-```error CS2001: Source file `Assets/Extensions/hub-sdk/Extensions/VRTK/Assets/VRTK/Examples/ExampleResources/SceneResources/[001 - Interactions] ControllerEvents/Scripts/VRTKExample_ControllerEventsDelegateListeners.cs' could not be found.``` it is unfortunately a really annoying error with too long filenames which cannot be handled by the system. The easy solution is to move your whole Unity project to a shorter absolute path like ```C:\Users\User\Documents\MyHubTutorial```.
+```error CS2001: Source file `Assets/Extensions/hub-sdk/Extensions/VRTK/Assets/VRTK/Examples/ExampleResources/SceneResources/[001 - Interactions] ControllerEvents/Scripts/VRTKExample_ControllerEventsDelegateListeners.cs' could not be found.``` 
+
+This is unfortunately a really annoying error with too long filenames which cannot be handled by the system. The easy solution is to move your whole Unity project to a shorter absolute path like ```C:\Users\User\Documents\MyHubTutorial```.
 
 ### Hub SDK Wizard
 
 To make your life easier we included the _Hub SDK Setup Wizard_ which helps you to setup your project. You can find it by clicking on ```Innoactive > Hub > Setup Wizard```. The Wizard will pop-up and show you a list of settings with errors and warnings. We can ignore most of them for now (especially because they are automatically created for you) but want to explain some important ones.
 
-_Note:_ It might happen that the following error shows whenever you want to open the _Setup Wizard_
+**Note:** It might happen that the following error shows whenever you want to open the _Setup Wizard_:
 
 ```UnityException: .ctor is not allowed to be called from a ScriptableObject constructor (or instance field initializer), call it in OnEnable instead. Called from ScriptableObject 'HubSDKWizard'. See "Script Serialization" page in the Unity Manual for further details.```
 
