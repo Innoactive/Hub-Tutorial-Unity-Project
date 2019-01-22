@@ -16,7 +16,15 @@ Additionally, Photon as a proven network technology is used to guarantee stable 
 
 # What you need to start
 
-Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and access to the _Innoactive Hub Backend_ (optional but recommended).
+To complete the whole tutorial simply clone this repository into an empty Unity project. Additionally you need to fulfil the following requirements:
+
+* Innoactive Hub SDK v3.3.2
+* [SteamVR Unity Plugin v1.2.3 [deprecated]](https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/1.2.3)
+* Photon Credentials
+* Innoactive Hub Client Credentials
+* Innoactive Hub Web Management Console Credentials
+* Innoactive Hub Reality ID
+* Unity 2017.4 LTS (our recommended version)
 
 <div style="page-break-after: always;"></div>
 
@@ -28,7 +36,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.2** _Innoactive Hub SDK Wizard_
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.3** Photon Settings
+[//]: # (&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.3** Photon Settings)
 
 
 &nbsp; [**Chapter 2** Setup Unity scene](#Chapter2)
@@ -176,9 +184,19 @@ After the Hub SDK as well as Steam VR is imported we take care of the following 
 
 Go to the Unity PlayerSettings and change the Api Compatibility Level in Other Settings from _.Net 2.0 Subset_ to _.Net 2.0_.
 
+After compiling another error _might_ pop-up:
+
+```error CS2001: Source file `Assets/Extensions/hub-sdk/Extensions/VRTK/Assets/VRTK/Examples/ExampleResources/SceneResources/[001 - Interactions] ControllerEvents/Scripts/VRTKExample_ControllerEventsDelegateListeners.cs' could not be found.``` it is unfortunately a really annoying error with too long filenames which cannot be handled by the system. The easy solution is to move your whole Unity project to a shorter absolute path like ```C:\Users\User\Documents\MyHubTutorial```.
+
 ### Hub SDK Wizard
 
 To make your life easier we included the _Hub SDK Setup Wizard_ which helps you to setup your project. You can find it by clicking on ```Innoactive > Hub > Setup Wizard```. The Wizard will pop-up and show you a list of settings with errors and warnings. We can ignore most of them for now (especially because they are automatically created for you) but want to explain some important ones.
+
+_Note:_ It might happen that the following error shows whenever you want to open the _Setup Wizard_
+
+```UnityException: .ctor is not allowed to be called from a ScriptableObject constructor (or instance field initializer), call it in OnEnable instead. Called from ScriptableObject 'HubSDKWizard'. See "Script Serialization" page in the Unity Manual for further details.```
+
+If that happens simply close Unity and your Editor (if open) and reopen Unity. Then open the _Setup Wizard_.
 
 The _Hub Settings_ are your central point for general settings within your application. You can set specific build settings, colors to customize your experience, standard menu actions etc. Most of this will be covered in later chapters.
 
@@ -257,7 +275,7 @@ Just play around with the menu and spawned objects and see what you can do with 
 
 As briefly mentioned in the previous chapter using the teleporter is your way to get around the scene. But often it is necessary to restrict the user from going everywhere in the scene.
 
-Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand ontop of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements.
+Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand ontop of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements. When copying a string into the field it may happen that an empty space is added at the end. This will cause issues because the Policy List will not handle that properly and recognizes the entered string as different than the one you actually want to ignore. So make sure there is no empty space added.
 
 Sometimes instead of just restricting a user to access a certain area it is needed to hide what they can see. Keep in mind that people in Virtual Reality can walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just (physically) walks right through it they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this we simply fade out the user's view. 
 
@@ -331,7 +349,7 @@ When you are done implementing the logic, switch back to Unity and exchange the 
 
 ## <a name="Chapter7"></a>**Chapter 7** Use context menu
 
-As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based context menu.
+As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based [_ContextMenu_](http://docs.hub.innoactive.de/articles/context-menu.html).
 
 First give the default context actions a look and add the _DefaultContextActions_ component to your flashlight. Disable Use, Scale, Clone and Align, which we do not need. You will see now that those default actions are shown in the context menu of the flashlight.
 
@@ -379,7 +397,7 @@ You can customize your menu even further by adding your own submenus to it. The 
 
 To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text ("Teleport to 1/2/3) and the icons from ```Assets > Resources > Icons > icon_1/2/3``` and for the action make use of the _TeleportTo_ method which you need to implement next.
 
-_TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method.
+_TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method. _Note:_ VRTK includes the [_VRTK_DeviceFinder_](https://vrtoolkit.readme.io/docs/vrtk_devicefinder) which is really helpful in finding the _PlayArea_ but also in general other objects like the _Headset_ or _Controllers_.
 
 The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the spaces icon (```... > menu > Icons > SpacesIcon```).
 
@@ -479,7 +497,7 @@ Let's focus on the callback method which handles the spread angle first whic wil
 
 Using _HubCommands_ is a bit more complicated. You find the internal class _LightStateChangedCommand_ which inherits from _HubCommand_ within your networked flashlight script. A _HubCommand_ is basically a command which can be configured and then executed for every user.
 
-First implement the constructor and create a new _GameObjectReference_ to the flashlight and also set the light state. _Execute_ will be called for each user and the _Get_ function of your flashlight reference is used to get the _UpdateTarget_ method to eventually change the light state remotely. In _UpdateTarget_ the method _RemoteChangeLightState_ with the new light state has to be called. Back in the callback you just have to create a new _LightStateChangedCommand_ with the proper arguments and execute it.
+First implement the constructor and create a new _GameObjectReference_ to the flashlight and also set the light state. _Execute_ will be called for each user and the _Get_ function of your flashlight reference is used to get the _UpdateTarget_ method to eventually change the light state remotely. In _UpdateTarget_ the method _RemoteChangeLightState_ with the new light state has to be called by the _target_ object. Back in the callback you just have to create a new _LightStateChangedCommand_ with the proper arguments and execute it.
 
 The two remote methods are kinda similar. The _RemoteSpreadChanged_ method has a _[PunRPC]_ attribute, so it is registered for each user and therefore can be called with _Photon's RPC_ functionality. In here you just have to change the spread angle of the flashlight. The _RemoteChangeLightState_ is more or less the same gets the new light state and simply sets it in the _local_ flashlight. Remember, this method is called within the _HubCommand_ which is passed to every user, so we do not need a _RPC_ attribute here!
 
@@ -493,7 +511,7 @@ Finally, add your _FlashlightNetworking_ script to the flashlight prefab and dis
 
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
-This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The _WindowFactory_ will save you a lot of time and also keeps your messages consistent.
+This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The [_WindowFactory_](http://docs.hub.innoactive.de/api/Innoactive.Hub.UI.WindowSystem.WindowFactory.html) will save you a lot of time and also keeps your messages consistent.
 
 To demonstrate how the _WindowFactory_ works, extend your custom teleport menu from chapter 8 by adding a new button which will open a dialog window that shows your current position and lets you reset your position to world origin.
 

@@ -77,10 +77,8 @@ namespace HubTutorial
         /// </summary>
         public bool IsLightOn
         {
-            get
-            {
-                return lightToToggle.enabled;
-            }
+            get;
+            set;
         }
 
         protected virtual void Awake()
