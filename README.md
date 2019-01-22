@@ -184,7 +184,7 @@ After the Hub SDK as well as Steam VR is imported we take care of the following 
 
 Go to the Unity PlayerSettings and change the Api Compatibility Level in Other Settings from _.Net 2.0 Subset_ to _.Net 2.0_.
 
-After compiling another error _might_ pop-up:
+**Note:** After compiling another error _might_ pop-up:
 
 ```error CS2001: Source file `Assets/Extensions/hub-sdk/Extensions/VRTK/Assets/VRTK/Examples/ExampleResources/SceneResources/[001 - Interactions] ControllerEvents/Scripts/VRTKExample_ControllerEventsDelegateListeners.cs' could not be found.``` 
 
@@ -199,6 +199,8 @@ To make your life easier we included the _Hub SDK Setup Wizard_ which helps you 
 ```UnityException: .ctor is not allowed to be called from a ScriptableObject constructor (or instance field initializer), call it in OnEnable instead. Called from ScriptableObject 'HubSDKWizard'. See "Script Serialization" page in the Unity Manual for further details.```
 
 If that happens simply close Unity and your Editor (if open) and reopen Unity. Then open the _Setup Wizard_.
+
+&nbsp;
 
 The _Hub Settings_ are your central point for general settings within your application. You can set specific build settings, colors to customize your experience, standard menu actions etc. Most of this will be covered in later chapters.
 
