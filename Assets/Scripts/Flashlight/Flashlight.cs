@@ -77,15 +77,13 @@ namespace HubTutorial
         /// </summary>
         public bool IsLightOn
         {
-            get
-            {
-                return lightToToggle.enabled;
-            }
+            get;
+            set;
         }
 
         protected virtual void Awake()
         {
-            // TODO Chapter 6: Initially turn light off and set intial spread angle.
+            // TODO Chapter 6: Initially turn light off and set initial spread angle.
         }
 
         /// <summary>

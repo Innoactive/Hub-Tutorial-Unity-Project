@@ -18,7 +18,17 @@ Additionally, Photon as a proven network technology is used to guarantee stable 
 
 # What you need to start
 
-Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and access to the _Innoactive Hub Backend_ (optional but recommended).
+To complete the whole tutorial simply clone this repository into an empty Unity project. Additionally you need to fulfil the following requirements:
+
+* Innoactive Hub SDK v3.3.2
+* [SteamVR Unity Plugin v1.2.3 [deprecated]](https://github.com/ValveSoftware/steamvr_unity_plugin/releases/tag/1.2.3)
+* Photon Credentials
+* Innoactive Hub Client Credentials
+* Innoactive Hub Web Management Console Credentials
+* Innoactive Hub Reality ID
+* Unity 2017.4 LTS (our recommended version)
+
+<div style="page-break-after: always;"></div>
 
 # Table of contents
 
@@ -28,7 +38,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.2** _Innoactive Hub SDK Wizard_
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.3** Photon Settings
+[//]: # (&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **1.3** Photon Settings)
 
 
 &nbsp; [**Chapter 2** Setup Unity scene](#Chapter2)
@@ -99,7 +109,6 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 [//]: # (8.4 Maybe show how to make an application quit button or something more stupid but similar. Do this in a future iteration.)
 
-
 &nbsp; [**Chapter 9** _Innoactive Hub_ Backend Setup](#Chapter9)
 
 &nbsp; &nbsp; _**Note:** You can only complete this chapter if you have access to the Innoactive Hub Backend_
@@ -153,6 +162,7 @@ Simply clone this repository and get your own _Innoactive Hub Unity SDK_ and acc
 
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **14.1** Setup a spectator
 
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter1"></a>**Chapter 1** Setup Unity project
 
@@ -176,9 +186,23 @@ After the Hub SDK as well as Steam VR is imported we take care of the following 
 
 Go to the Unity PlayerSettings and change the Api Compatibility Level in Other Settings from _.Net 2.0 Subset_ to _.Net 2.0_.
 
+**Note:** After compiling another error _might_ pop-up:
+
+```error CS2001: Source file `Assets/Extensions/hub-sdk/Extensions/VRTK/Assets/VRTK/Examples/ExampleResources/SceneResources/[001 - Interactions] ControllerEvents/Scripts/VRTKExample_ControllerEventsDelegateListeners.cs' could not be found.``` 
+
+This is unfortunately a really annoying error with too long filenames which cannot be handled by the system. The easy solution is to move your whole Unity project to a shorter absolute path like ```C:\Users\User\Documents\MyHubTutorial```.
+
 ### Hub SDK Wizard
 
 To make your life easier we included the _Hub SDK Setup Wizard_ which helps you to setup your project. You can find it by clicking on ```Innoactive > Hub > Setup Wizard```. The Wizard will pop-up and show you a list of settings with errors and warnings. We can ignore most of them for now (especially because they are automatically created for you) but want to explain some important ones.
+
+**Note:** It might happen that the following error shows whenever you want to open the _Setup Wizard_:
+
+```UnityException: .ctor is not allowed to be called from a ScriptableObject constructor (or instance field initializer), call it in OnEnable instead. Called from ScriptableObject 'HubSDKWizard'. See "Script Serialization" page in the Unity Manual for further details.```
+
+If that happens simply close Unity and your Editor (if open) and reopen Unity. Then open the _Setup Wizard_.
+
+&nbsp;
 
 The _Hub Settings_ are your central point for general settings within your application. You can set specific build settings, colors to customize your experience, standard menu actions etc. Most of this will be covered in later chapters.
 
@@ -187,6 +211,8 @@ The _Hub Client Credentials_ are your personal credentials to access the backend
 As mentioned before Multi User is based on _Photon_. To configure your multi user settings we use another config file for this which you can also find in _Hub-Tutorial-Unity-Project/Config_ (after you clicked on save in the SDK Wizard). For now multi user is turned off but will be explained in Chapter 11.
 
 So for now just enter your _Hub Client Credentials_ and click on save on the bottom of the _Hub SDK Wizard_. The rest is handled for you. Just to be save you should check your _Photon Settings_ in _Hub-Tutorial-Unity-Project/Config/photon-config.json_ and make sure _hosting_ is set to _"OfflineMode"_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter2"></a>**Chapter 2** Setup Unity scene
 
@@ -229,6 +255,8 @@ To make your scene a less empty space add a simple floor. You can find one in th
 
 **Solution:** Find the initially setup scene in _ChapterSolutions/Chapter-2_Setup-Unity-Scene.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter3"></a>**Chapter 3** Explore the basics
 
 This chapter is all about exploring the basic features of the _Innoactive Hub_ and will show you what is possible even without writing a single line of code. Start the application by clicking the Play button in Unity. 
@@ -247,11 +275,13 @@ Next to the Main Menu, which is a global menu, exists the object-based _Context 
 
 Just play around with the menu and spawned objects and see what you can do with the different things. For instance spawn a basic object from the objects menu, change it's color and physics and use bi-manual scaling to make it bigger and smaller (grab it with both hands and move the hands apart). Furthermore, you can change your own representation in VR by changing your avatar in the Avatar menu section. It's also possible to create your own avatar which is a more advanced topic and will not be covered in this tutorial.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter4"></a>**Chapter 4** Get around your scene
 
 As briefly mentioned in the previous chapter using the teleporter is your way to get around the scene. But often it is necessary to restrict the user from going everywhere in the scene.
 
-Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand ontop of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements.
+Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand ontop of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements. When copying a string into the field it may happen that an empty space is added at the end. This will cause issues because the Policy List will not handle that properly and recognizes the entered string as different than the one you actually want to ignore. So make sure there is no empty space added.
 
 Sometimes instead of just restricting a user to access a certain area it is needed to hide what they can see. Keep in mind that people in Virtual Reality can walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just (physically) walks right through it they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this we simply fade out the user's view. 
 
@@ -268,10 +298,12 @@ Now make usage of VRTK logic to be aware when the user is in the prohibited zone
 **_HeadsetCollisionFade_** with the added VRTK_HeadsetCollision and HeadsetFade and set the _Mode_ to _FADE_WHEN_INSIDE_COLLIDER_.
 
 <p align="center">
-  <img width="385" height="581" src="./Documentation/Images/Chapter4_HeadsetFade.png">
+  <img src="./Documentation/Images/Chapter4_HeadsetFade.png">
 </p>
 
 **Solution:** Find the populated scene in _ChapterSolutions/Chapter-4_Get-Around-Your-Scene.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter5"></a>**Chapter 5** Create interactable objects
 
@@ -291,13 +323,15 @@ We start by creating the interactable box. Drop the _WoodenBox_ prefab into the 
 
 Finally rename the object to _InteractableWoodenBox_ and save it as a prefab for later use. Run the application and see how you can now manipulate your interactable object.
 
-Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _WoodenboxDropZone_, assign it a _BoxCollider_ with center (0, 1.375, 0) and size (0.492, 0.33, 0.684), which is 1.2 times the size of the collider of the wooden box. Place the snap drop zone ontop of the table. Additionally, assign a _SnapDropZone_ component to the object and set Snap Duration to 0.5 and Highlight Always Active to true. 
+Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _WoodenboxDropZone_, assign it a _BoxCollider_ with center (0, 0.1375, 0) and size (0.492, 0.33, 0.684), which is 1.2 times the size of the collider of the wooden box and make it a trigger. Place the snap drop zone ontop of the table, for example at (-0.8, 0.775, -2). Additionally, assign a _SnapDropZone_ component to the object and set Snap Duration to 0.5 and Highlight Always Active to true. 
 
 Now you need to add a prefab which is shown as highlight object for the snap zone. Simply duplicate the _WoodenBox_ prefab, rename it to _HighlightWoodenBox_ and assign the _WoodenboxHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the WoodenboxDropZone choose the newly created prefab.
 
-Finally choose colors for the both highlighting (blue) and valid highlighting (green). Run the application and see what happens when you grab your box, move it close to the snap zone and release it when marked as valid.
+Finally choose colors for the both highlighting (blue) and valid highlighting (green) with transparancy. Run the application and see what happens when you grab your box, move it close to the snap zone and release it when marked as valid.
 
 **Solution:** Find all created prefabs and the populated scene in _ChapterSolutions/Chapter-5_Create-Interactable-Objects.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter6"></a>**Chapter 6** Flashlight: Create custom tool
 
@@ -307,9 +341,9 @@ Drop the already prepared flashlight prefab into the scene and make it interacta
 
 Add a SpotLight component to the Flashlight, position it properly at the tip of the flashlight and change the color to make it a slight yellow. Run the application, grab the light and move around. You just created your first _stupid_ tool.
 
-Now add some logic. Open up the _Flashlight_ script in the folder _Scripts_. Notice how it inherits from _InteractableObject_, so all we do is extend the already attached InteractableObject to give it more functionality but still keep interaction consistent between all objects.
+Now add some logic. Open up the _Flashlight_ script in ```Assets > Scripts > Flashlight```. Notice how it inherits from _InteractableObject_, so all we do is extend the already attached InteractableObject to give it more functionality but still keep interaction consistent between all objects.
 
-**Note:** You will find TODOs in the already prepared scripts which describe how and where you need to add logic. Therefore, this written documentation will be kept a bit shorter but the intended behavior will be described. We left some basic concepts out but make sure to go through the complete script to understand the logic completely. The solution package will have the fully implemented script.
+**Note:** You will find ToDo's in the already prepared scripts which describe how and where you need to add logic. Therefore, this written documentation will be kept a bit shorter but the intended behavior will be described. We left some basic concepts out but make sure to go through the complete script to understand the logic completely. The solution package will have the fully implemented script.
 
 The flashlight should be turned off from the beginning and the size/spread angle of the spotlight should be set to it's initial value as set in the Unity Editor. When the tool is used the light is supposed to be turned on. We also want the spread angle to be adjustable.
 
@@ -317,9 +351,11 @@ When you are done implementing the logic, switch back to Unity and exchange the 
 
 **Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-6_Create-Custom-Tool.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter7"></a>**Chapter 7** Use context menu
 
-As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based context menu.
+As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based [_ContextMenu_](http://docs.hub.innoactive.de/articles/context-menu.html).
 
 First give the default context actions a look and add the _DefaultContextActions_ component to your flashlight. Disable Use, Scale, Clone and Align, which we do not need. You will see now that those default actions are shown in the context menu of the flashlight.
 
@@ -327,11 +363,13 @@ Open the Hub-Settings which were created in chapter 1. Here you can change the d
 
 After making sure all default actions are working, let's take care of customizing the context menu. Open up the _FlashlightContextMenu_ script and go through the ToDo's. Notice that the menu inherits _IContextMenuAction_ and has a priority field. The priority defines the position of the action within the menu. 
 
-The desired look are two new added buttons with the default design. One button to increase and one to decrease the spread angle of the light. Additionally, the spread angle should be capped at a maximum and minimum value.
+The desired look are two new added buttons with the default design. One button to increase and one to decrease the spread angle of the light, you can use the icons we provided in ```Assets > Resources > Icons``` and call the buttons _Decrease Spread_ and _Increase Spread_. Additionally, the spread angle should be capped at a maximum and minimum value.
 
 Finally, add the script to the flashlight object.
 
 **Solution:** Find the implemented script and the populated scene in _ChapterSolutions/Chapter-7_Use-Context-Menu.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter8"></a>**Chapter 8** Use main menu
 
@@ -339,17 +377,19 @@ You created now your fully functional tool but as an object in the scene which i
 
 To make the main menu adjustable and extendable we decided on a XML based solution. You can read everything about it in the [_Main Menu Documentation_](http://docs.hub.innoactive.de/articles/menu.html). In this tutorial we will just cover some basic concepts.
 
-You need to create your own menu first. To do this choose ```Innoactive > Hub > Create XML Menu``` to open the menu creation window. The _Menu Bundle ID_ is basically the name of your menu. For this tutorial set it to _Tutorial_. You also want to make use of the default _Innoactive Hub_ menu to reduce work and to get the same behaviour. Therefore, leave Inherit from other Menu enabled and choose _Hub_ for Bundle Id and _MainMenu_ for Base Main Menu. This simply, as the name says, inherits from the standard menu and provides a good starting point for you. 
+You need to create your own menu first. To do this choose ```Innoactive > Hub > UI > Create XML Menu``` to open the menu creation window. The _Menu Bundle ID_ is basically the name of your menu. For this tutorial set it to _Tutorial_. You also want to make use of the default _Innoactive Hub_ menu to reduce work and to get the same behaviour. Therefore, leave Inherit from other Menu enabled and choose _Hub_ for Bundle Id and _MainMenu_ for Base Main Menu. This simply, as the name says, inherits from the standard menu and provides a good starting point for you. 
 
 <p align="center">
-  <img width="75%" src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
+  <img src="./Documentation/Images/Chapter7_XMLMenuWizard.png">
 </p>
 
-After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the HubDefaultMenu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the TutorialMenu.xml, thus you actually need to provide this. You can leave it empty but need to provide this section.
+After you clicked _Create Menu_ the XML description of your new menu will be created in ```Assets > Menu > Resources```. Additionally, a ScriptableObject _TutorialMenuBundleSource_ is created in ```Assets > Menu```. Next choose _Set Menu for current Scene_. You will see in your _[HUB_MENU_SETUP]_ GameObject that your XML menu is set in the Runtime Menu Setup. This currently is just a copy of the default menu. Open your menu and also the default Hub menu (```Assets > Extensions > hub-sdk > SDK > UI > Menu > Resources > Menu > HubDefaultMenu.xml```) for reference. Make sure you have a _MainMenu_ section which extends _Hub.MainMenu_. The Hub Menu Setup as a matter of fact references the _MainMenu_ within the _TutorialMenu.xml_, thus you actually need to provide this. You can leave it empty but need to provide this section.
 
-The first step to extending your custom menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the Default Actions anymore because they are automatically added when the object is spawned from the menu. You can delete the flashlight in the scene now.
+### Extend the menu
 
-To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ Flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -35, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
+The first step to extending your menu, is to add your flashlight as a new tool. Before we can do this we need to add it as a Resource. Remove the Default Context Menu Actions (but leave the custom ones) from your flashlight object in the scene and save it as a new Prefab in ```Assets > Resources > Prefabs``` (create a new folder). We do not need the default actions anymore because they are automatically added when the object is spawned from the menu. You can delete the flashlight in the scene now.
+
+To properly show the flashlight within the menu a thumbnail is useful. Duplicate the _clean_ flashlight from the Prefabs folder which does not have any scripts, rename it to _FlashlightThumbnail_ and move it to the just created Resources Prefab folder. Reset its position to (0, 0, 0) and set rotation to (-35, -90, 0). This way it will look a bit more fancy when displayed in the menu. Also remove every collider on the object and all of its children.
 
 Now open your _TutorialMenu.xml_ and the _TutorialMenu_ToDos.xml_ to see what is to do to show the flashlight in the menu and actually spawn it on click. As said before, we also suggest opening the _HubDefaultMenu.xml_ for reference.
 
@@ -357,23 +397,27 @@ First extend the _ToolsMenu_ section by extending as well as replacing the _Hub.
 
 Run your application and try out your new tool spawned from the Tools section of your menu. You will also see that it has all context menu actions.
 
+### Custom menus
+
 You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which teleports the user to certain positions in the scene. Open the _CustomTeleportMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for chapter 8 and ignore the ones from chapter 12 which we will tackle later on to extend this feature.
 
-To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text but without any specific icon and for the action make use of the _TeleportTo_ method which you need to implement next.
+To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text ("Teleport to 1/2/3) and the icons from ```Assets > Resources > Icons > icon_1/2/3``` and for the action make use of the _TeleportTo_ method which you need to implement next.
 
-_TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method.
+_TeleportTo_ just gets a destination position but you will need to find the _VRTK_BasicTeleport_ as well as the _PlayArea_ to make use of the teleports _Teleport_ method. _Note:_ VRTK includes the [_VRTK_DeviceFinder_](https://vrtoolkit.readme.io/docs/vrtk_devicefinder) which is really helpful in finding the _PlayArea_ but also in general other objects like the _Headset_ or _Controllers_.
 
-The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the number icons (```Icons > icon_1/2/3```).
+The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Teleport Menu") and an icon where you can simply use the spaces icon (```... > menu > Icons > SpacesIcon```).
 
 Run the application move around and open your menu. You will see a new entry at the end of the list. Navigate to it and make use of the three newly added menu functions.
 
 **Solution:** Find the implemented script, menu and the cleaned scene in _ChapterSolutions/Chapter-8_Use-Main-Menu.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter9"></a>**Chapter 9** _Innoactive Hub_ Backend Setup
 
 This chapter is all about setting up your _Innoactive Hub_ Backend and how to make use of it.
 
-_Note:_ Get your credentials or you will not have access to the _Web Management Console_.
+_Note:_ Get your client credentials from your _Innoactive_ contact person or you will not have access to the _Web Management Console_.
 
 There are two ways to configure your client settings, the settings you need to make to have actual access. 
 
@@ -383,9 +427,11 @@ Enable the _[HUB-LOGIN-CHECK]_ object in your scene and open up the Hub-Settings
 
 > A reality is one _unique_ version of your application. You can kinda see realities as parallel universes. While in Reality A you have three pens, a flashlight and some drawings floating around, in reality B you only moved your box right next to the wall and have a measuring tape to check the distance to your table. Both realities build upon the same basic scene/application and exist next to each other but the states of the objects are different. This allows multiple people to work within the same application without interfering with each other. Realities do not know each other and within one application you cannot jump between realities!
 
-Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images, sounds and/or videos from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
+Start your application and open your menu. You will see new entries which you can only use when you have access to the backend. Spawn some models, images or presentations from the backend just like you did with _local_ resources. To populate your scene with your own objects open up your _Web Management Console_ (WMC) online and upload a new model. When you are all done run the application again and see how your just added object is already available in the menu without changing the application at all.
 
 **Solution:** Find the scene with activated login check in _ChapterSolutions/Chapter-9_Innoactive_Hub_Backend_Setup.unitypackage_. _Note:_ You still need to setup your client config credentials by hand.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter10"></a>**Chapter 10** Persistence
 
@@ -395,19 +441,19 @@ To get into more detail, a space has objects and those objects have properties. 
 
 _Note:_ Find more information in our official [documentation](http://docs.hub.innoactive.de/articles/persistence.html).
 
-### Save, Load and Reset
+### Save, load and reset
 
 Loading is done by the _SceneNavigationManager_ which has actions to load a certain space by Id but typically the last saved space is loaded. While being in multi-user every user in the same room loads the same space.
 
-So far for the theory, in practice the goal of this chapter is to first save a space, see how it shows up in the WMC and then load it again via the menu. Additionally, the flashlight from chapter 6 will be persisted and you will learn how to switch between scenes without losing the changes made before.
+So far for the theory, in practice the goal of this chapter is to first save a space and then load it again via the menu. Additionally, the flashlight from chapter 6 will be persisted and you will learn how to switch between scenes without losing the changes made before.
 
-Let's start by spawning some tools and moving them around. Then open the menu and save your space. Check your WMC and see how it shows up there. But we cannot load it yet. 
+Let's start by spawning some tools and moving them around. Then open the menu and save your space but you cannot load it yet. 
 
-As said before, the loading will be done through a new menu button. Start editing your _TutorialMenu_ XML description from chapter 8 and include _SpacesMenu_ which extends _Hub.SpacesMenu_, just like we did with the _ToolsMenu_ before. Include two new buttons, one for actually loading a space and one for resetting your current space to the original state. 
+As said before, the loading will be done through a new menu button. Start editing your _TutorialMenu_ XML description from chapter 8 and include _SpacesMenu_ which replaces _Hub.SpacesMenu_, just like with the _ToolsMenu_. Include two new buttons, one for actually loading a space and one for resetting your current space to the original state. 
 
 First the loading: Create a default button with Id _Load_. As a condition make sure the user is logged into the _Innoactive Hub_ Backend. This makes the button only visible if the condition is met. Next add a _CommandBehaviour_ with a _NavigationActionCommand_ and loading the last revision of the given Unity scene as action. For scene use the name of your scene (_TutorialScene_). Additionally, make sure the command is only executed locally, so not every other user is forced into the loaded space, and it is not automatically saved when the space is left. As description for this icon use _Load_ and as icon the _Icon_Menu_Download_ which you can find at ```Menu > Icons > Icon_Menu_Download```.
 
-Resetting your space is similar to loading. Again, create a new default button with the same condition and the same command behaviour and the same command type. Make sure it is also only executed for the local player, in the same scene as before and do not save when leaving the space. But for the action make sure this time only the local unity scene is loaded. Call this button _Reset_ and give it the _HomeIcon_ which you can find in the same folder as the other one.
+Resetting your space is similar to loading. Again, create a new default button with the same condition and the same command behaviour and the same command type. Make sure it is also only executed for the local player, in the same scene as before and do not save when leaving the space. But for the action make sure this time only the local unity scene is loaded. Call this button _Reset_ and give it the _HomeIcon_ which you can find in the same folder as the one for loading.
 
 Save your XML file and start your application. Choose _Load_ to load the previously saved state and you will see that your objects will be where you left them before. Now reset your space, load again, reset again and finally save. Now your empty space is your last saved space.
 
@@ -431,43 +477,69 @@ The last step to have your flashlight persistet is to add the implemented extens
 
 ### Jump between scenes
 
+_Note:_ Make sure your _TutorialScene_ as well as _TutorialScene2_ are added to the BuildSettings.
+
 The last thing covered in this chapter is how to switch scenes. You can change scenes with the _SceneNavigationManager_ in your code or, as done in this tutorial, through the menu. Open your XML menu again and extend your previously edited _SpacesMenu_ further. Add two new entries which are basically the same but differ in the scene they are loading. Create again a default button with condition but this time it is an environment condition which hides the button if your current environment/scene is the same as the one to load. Therefore, you cannot switch to a scene you are already in. For the behaviour it is the exact same as for Load previously (local CommandBehaviour, loading the last saved space and is not saved when loading a new space). Call the button "Go to Tutorial 1" and use the simple icon with the number 1 again. Do the same for the scene _TutorialScene2_ which you can find in the same folder and is an empty scene just to show how to switch scenes. 
 
 **Solution:** Find the extended menu in _ChapterSolutions/Chapter-10.3_Persistence_Switching-Scenes.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter11"></a>**Chapter 11** Multi-User
 
-Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to muli-user sessions!
+Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to multi-user sessions!
 
-The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabalities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_). Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
+The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabilities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_). Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
 
-Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworking_ component to the _WoodenboxDropZone_, run the application and see how other people can manipulate objects within the same scene.
+Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworked_ component to the _WoodenboxDropZone_, run the application and see how other people can manipulate objects within the same scene.
 
-When you spawn your flashlight you can see that it automatically gets a _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
+When you spawn your flashlight you can see that it automatically gets an _InteractableObjectNetworking_ and moving the object is networked but the state as well as the spread angle are not. Therefore, those special functionalities have to be synchronized _by hand_. Open the _FlashlightNetworking_ script which already inherits from _InteractableObjectNetworking_ and thus just the special behavior has to be implemented. 
+
+In this tutorial two different ways of implementing networked methods are covered, _RPC_ and _HubCommands_. You usually would just use one but this shows you both possibilities.
+
+First, it is important to know when and what has to be networked and when other users have to be notified. Since it is not necessary to constantly synchronize the current spread angle even though it does not change, subscribe in _OnEnable_ to the flashlight events created in chapter 6 - and obviously unsubscribe _OnDisable_. Within the class you find already two methods which should be called when the appropriate events are fired.
+
+Let's focus on the callback method which handles the spread angle first whic will make use of _Photon's RPC_. In here you can simply make use of the attached _PhotonView_ and call its method _RPC_ with the name of the method to call (in this case "RemoteSpreadChanged"), who is the receiver of this call (only other players, since the local user has already changed the angle) and the new angle which you can get from the passed arguments. That is all you have to do when making use of _Photon_.
+
+Using _HubCommands_ is a bit more complicated. You find the internal class _LightStateChangedCommand_ which inherits from _HubCommand_ within your networked flashlight script. A _HubCommand_ is basically a command which can be configured and then executed for every user.
+
+First implement the constructor and create a new _GameObjectReference_ to the flashlight and also set the light state. _Execute_ will be called for each user and the _Get_ function of your flashlight reference is used to get the _UpdateTarget_ method to eventually change the light state remotely. In _UpdateTarget_ the method _RemoteChangeLightState_ with the new light state has to be called by the _target_ object. Back in the callback you just have to create a new _LightStateChangedCommand_ with the proper arguments and execute it.
+
+The two remote methods are kinda similar. The _RemoteSpreadChanged_ method has a _[PunRPC]_ attribute, so it is registered for each user and therefore can be called with _Photon's RPC_ functionality. In here you just have to change the spread angle of the flashlight. The _RemoteChangeLightState_ is more or less the same gets the new light state and simply sets it in the _local_ flashlight. Remember, this method is called within the _HubCommand_ which is passed to every user, so we do not need a _RPC_ attribute here!
+
+As you probably noticed you can get into a nasty recursion, since one user for example changes the spread angle of the flashlight and fires the matching event. Then the networked flashlight makes sure all other users update their flashlights which then triggers the event again and and therefore notifies the _FlashlightNetworking_ again which tries to synchronize its state with the other users. Thus we introduce a simple recursion lock flag which secures that things are only executed when they should. Hence, activate the recursion lock before you update the local flashlight and deactivate it afterwards and ensure that the callbacks are only executed when the recursion lock is inactive.
+
+Finally, add your _FlashlightNetworking_ script to the flashlight prefab and disable _Synchronize Usage_ for testing purposes. Run your application and try your new networked tool.
+
+**Solution:** Find the implemented script and updated prefab in _ChapterSolutions/Chapter-11_Multi-User.unitypackage_.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="Chapter12"></a>**Chapter 12** Window System
 
-This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The _WindowFactory_ will save you a lot of time and also keeps your messages consistent.
+This chapter covers one of the many helper and utility features within the _Innoactive Hub SDK_ which will make your life easier. Sometimes you might want to show a notification, dialog or error message for the user in the virtual environment. The [_WindowFactory_](http://docs.hub.innoactive.de/api/Innoactive.Hub.UI.WindowSystem.WindowFactory.html) will save you a lot of time and also keeps your messages consistent.
 
 To demonstrate how the _WindowFactory_ works, extend your custom teleport menu from chapter 8 by adding a new button which will open a dialog window that shows your current position and lets you reset your position to world origin.
 
-So Step by step, start by opening your _CustomTeleportMenu_ script which still has some ToDo's open. Edit the _ShowCurrentPositionWindow_ method and make use of the _WindowFactory_. Create an actions window with a text tells you your current position and rotation and the title _Current Position_. Additionally, add two buttons. One that says _Okay_ and simply closes the dialog box and one that says _Reset_ and teleports you to the world origin (also closing the box afterwards).
+So step by step, start by opening your _CustomTeleportMenu_ script which still has some ToDo's open. Edit the _ShowCurrentPositionWindow_ method and make use of the _WindowFactory_. Create an actions window with a text which tells you your current position and rotation and the title "Current Position". Additionally, add two buttons. One that says _Okay_ and simply closes the dialog box and one that says _Reset_ and teleports you to the world origin (also closing the box afterwards).
 
-Next give the user the possibility to actually open the window. Add a new button to the custom menu with the _SettingsIcon_ which you can find at ```Menu > Icons > SettingsIcon```, the title _Show Position_ and which opens the previously implemented window. Run your app and try it out by opening your menu and navigating to the teleport menu.
+Next give the user the possibility to actually open the window. Add a new button to the custom menu with the _SettingsIcon_ which you can find at ```Menu > Icons > SettingsIcon```, the title "Show Position" and which opens the previously implemented window. Run your app and try it out by opening your menu and navigating to the teleport menu.
 
-You might not like the current color scheme or it does not fit your company's style. In that case, customize the _WindowFactory_ to your needs. Let's try by settings the background color to black, the text, title and button color to white and the border color to white. Let creativity run wild!
+You might not like the current color scheme or it does not fit your company's style. In that case, customize the _WindowFactory_ to your needs. Let's try by setting the background color to black, the text, title and button color to white and the border color to red. Let creativity run wild!
 
 **Solution:** Find the updated script in _ChapterSolutions/Chapter-12_Window-System.unitypackage_.
 
-## <a name="Chapter13"></a>**Chapter 13** Customize Controllers
+<div style="page-break-after: always;"></div>
+
+## <a name="Chapter13"></a>**Chapter 13** Customize controllers
 
 Currently when you start an application, controllers with default behavior (default _Innoactive Hub_ configuration) are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. In some cases you might not want to show a menu allow only the trigger to be used or change the appearance of the teleporter or even want your left controller to be different from your right one.
 
 In this chapter you will learn how to change the appearance of your teleporter to the default _VRTK_ look.
 
-You find configured controller prefabs in ```Assets > Extensions > hub-sdk > SDK > Interaction > Controller > Prefabs > Controller```. We assume you are using the _HTC Vive_, so duplicate the _Steam_Vive_LeftController_ as well as the _RightController_, move the copies to ````Assets > Controller``` (create a new folder if needed, the location does not matter though) and rename them to _Tutorial_Vive_LeftController_ and _TutorialVive_RightController_. These will be your new controllers whenever you start the application.
+You find configured controller prefabs in ```Assets > Extensions > hub-sdk > SDK > Interaction > Controller > Prefabs > Controller```. We assume you are using the _HTC Vive_, so duplicate the _Steam_Vive_LeftController_ as well as the _RightController_, move the copies to ```Assets > Controller``` (create a new folder if needed, the location does not matter though) and rename them to _Tutorial_Vive_LeftController_ and _Tutorial_Vive_RightController_. These will be your new controllers whenever you start the application.
 
-We have to add the controllers to the scene to actualy make use of them. Create a new _PrefabControllerConfig_ in a new folder _Config_ within the _Controller_ folder. Do this by right clicking the folder and choosing ```Create > InnoactiveHub > Controller > PrefabControllerConfig```. Rename the newly created _ScriptableObject_ to _TutorialConfig_. Set the name to _Tutorial_ and drag your prefabs into the controller fields. In your hierarchy navigate to ````[VRTK_SETUP] > [VRTK_Scripts] > ControllerConfigChooser```, expand the Configs section of the _ChooseController_ script and replace the config of _Steam VR_ + _HTC Vive_ with your _TutorialControllerConfig_. From now on, whenever you start your application - or to be more precise this scene, since controller configs are in scene not in project scope - your new custom controllers will be loaded.
+We have to add the controllers to the scene to actualy make use of them. Create a new _PrefabControllerConfig_ in a new folder _Config_ within the _Controller_ folder. Do this by right clicking the folder and choosing ```Create > InnoactiveHub > Controller > PrefabControllerConfig```. Rename the newly created _ScriptableObject_ to _TutorialControllerConfig_. Set the name to _Tutorial_ and drag your prefabs into the controller fields. In your hierarchy navigate to ```[VRTK_SETUP] > [VRTK_Scripts] > ControllerConfigChooser```, expand the Configs section of the _ChooseController_ script and replace the config of _Steam VR_ + _HTC Vive_ with your _TutorialControllerConfig_. From now on, whenever you start your application - or to be more precise this scene, since controller configs are in scene not in project scope - your new custom controllers will be loaded.
 
 The next step is to customize your controllers to see the difference. As mentioned before we simply change the appearance of the teleporter. In both of your custom controllers change the _VRTK_BezierPointerRenderer_ of the _TeleportPointer_ child object. On the bottom of the script you find _AppearanceSettings_ which you can replace with the prefabs in ```Assets > Extensions > hub-sdk > Extensions > VRTK > Assets > VRTK > Examples > ExampleResources > SharedResources > Prefabs > AnimatedBezierPointer```.
 
@@ -479,8 +551,10 @@ Run your application and teleport around to see the difference. To also make use
 
 **Solution:** Find the new controller prefabs, config and updated scene in _ChapterSolutions/Chapter-13_Customize-Controllers.unitypackage_.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="Chapter14"></a>**Chapter 14** Spectator
 
-The _Innoactive Hub_ is intended for business applications. Even though a user will train or plan in VR on their own they might have someone standing next to them without wearing a HMD but monitoring. Therefore, the _Innoactive Hub SDK_ offers the possibility to show what the user sees on a second display via a spectator. By default a spectator camera is created at run-time and shows what the user sees (with some additional information). Just start your application in the Unity Editor and find a _Spectator Camera_ object in your scene. You can customize this spectator camera by setting your own in the _PlayerSetupManager_ in the _[HUB-PLAYER-SETUP-MANAGER]_ in your scene. Usually this is not necessary but possible.
+The _Innoactive Hub_ is intended for business applications. Even though a user will train or plan in VR on their own they might have someone standing next to them without wearing a HMD but monitoring what the user in VR is doing. Therefore, the _Innoactive Hub SDK_ offers the possibility to show what the user sees on a second display via a spectator. By default a spectator camera is created at run-time and shows what the user sees (with some additional information). Just start your application in the Unity Editor and find a _Spectator Camera_ object in your scene. You can customize this spectator camera by setting your own in the _PlayerSetupManager_ in the _[HUB-PLAYER-SETUP-MANAGER]_ in your scene. Usually this is not necessary but the possibility is given.
 
 You can enable and disable this spectator via the _player-config.json_ which you can find in the _Config_ folder of your project. Since this option is included in the configuration files you can also turn it on and off when the application is built. 
