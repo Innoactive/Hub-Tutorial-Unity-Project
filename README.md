@@ -1,12 +1,14 @@
 # Innoactive Hub SDK Unity Tutorial
 
+**Important: This tutorial is under development and in an early beta stage (v0.1) and therefore is incomplete and does have issues. The document is provided by Innoactive currently only to selected partners and/or developers under certain circumstances and is not considered a final product. We are happy about feedback and will provide support through _support@innoactive.de_.**
+
 This repository provides a step-by-step guide to start developing with the _Innoactive Hub Unity SDK_. 
 
 You will learn how to setup your Unity project with the _Innoactive Hub_ and create Unity scenes, populate them with interactable objects and your own tools and how to persist them. Furthermore, we cover multiplayer capabilities, our extendable XML menu as well as the context menu and many more features.
 
 The tutorial is split into chapters, where every chapter builds upon the previous ones. We do not want you to just read code but learn how to use the _Hub_ by implementing yourself. Therefore, we provide stub code in (almost) every chapter and an explanation on what to do. Just follow the instructions of each chatper. Most chapters also come with a unitypackage which includes our suggested solution.
 
-The tutorial is currently based on version **3.3.2**, but will be kept up to date in the future - and also works for previous versions.
+The tutorial is currently based on version **3.3.2**, but will be kept up to date in the future - and also works for previous versions. **Note:** Since the tutorial is under development it may or may not work with later versions of the SDK. If you encounter problems with a newer version please contact us.
 
 # Overview
 
