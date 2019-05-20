@@ -1,15 +1,41 @@
 fileFormatVersion: 2
 guid: 068e7bca50f091f44a81cbe4e18f0b5d
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Flashlight
+    100004: FlashLightBulb
     400000: //RootNode
+    400002: Flashlight
+    400004: FlashLightBulb
     2300000: //RootNode
+    2300002: Flashlight
+    2300004: FlashLightBulb
     3300000: //RootNode
+    3300002: Flashlight
+    3300004: FlashLightBulb
     4300000: fonarik_low_max
+    4300002: Flashlight
+    4300004: Flashlight002
+    4300006: FlashLightBulb
     9500000: //RootNode
   externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Flashlight
+    second: {fileID: 2100000, guid: 6c6e749ef35fa964486723f91959e4fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlashlightBulb
+    second: {fileID: 2100000, guid: bd3ecb6fb43509f4c8a503b7c0d8ae4a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FlashlightGlas
+    second: {fileID: 2100000, guid: 64d74420f26f82b40a87b1be4d7bba97, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -33,6 +59,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -47,6 +74,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -64,11 +92,16 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -83,7 +116,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

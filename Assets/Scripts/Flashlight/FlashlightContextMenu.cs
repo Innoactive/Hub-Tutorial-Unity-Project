@@ -1,10 +1,9 @@
-﻿using Innoactive.Hub.Settings;
-using Innoactive.Hub.UI;
+﻿using Innoactive.Hub.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Extension of the context actions for the flashlight tool.
@@ -40,6 +39,8 @@ namespace HubTutorial
         /// <returns>List of buttons to add</returns>
         public List<IMenuItem> ProvideContextMenuActions()
         {
+            ContextMenuItemDesign design = new ContextMenuItemDesign();
+
             List<IMenuItem> buttons = new List<IMenuItem>();
 
             // TODO Chapter 7: Create and add new buttons to increase and decrease flashlight spread angle.

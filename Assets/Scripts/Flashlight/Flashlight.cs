@@ -3,18 +3,19 @@ using Innoactive.Hub.Interaction;
 using UnityEngine;
 using VRTK;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Flashlight tool which can be turned on and off.
     /// Also the spread angle of the light can be adjusted.
     /// </summary>
-    public class Flashlight : InteractableObject
+    public class Flashlight : MonoBehaviour
     {
         // Logger to get sufficient log information.
         private static readonly Common.Logging.ILog logger = Innoactive.Hub.Logging.LogManager.GetLogger<Flashlight>();
 
         #region Events
+
         #region EventArgs
 
         /// <summary>
@@ -23,6 +24,7 @@ namespace HubTutorial
         public class LightStateChangedEventArgs : EventArgs
         {
             public readonly bool NewState;
+
             public LightStateChangedEventArgs(bool newState)
             {
                 NewState = newState;
@@ -35,11 +37,13 @@ namespace HubTutorial
         public class SpreadChangedEventArgs : EventArgs
         {
             public readonly float NewSpread;
+
             public SpreadChangedEventArgs(float newSpread)
             {
                 NewSpread = newSpread;
             }
         }
+
         #endregion
 
         /// <summary>
@@ -51,6 +55,7 @@ namespace HubTutorial
         /// Event emitted when spread angle of light is changed.
         /// </summary>
         public event EventHandler<SpreadChangedEventArgs> SpreadChanged;
+
         #endregion
 
         [SerializeField]
@@ -60,6 +65,16 @@ namespace HubTutorial
         [SerializeField]
         [Tooltip("Spread angle of flashlight.")]
         private float spreadAngle = 25.0f;
+
+        [SerializeField]
+        [Tooltip("InteractableObject used to determine when the flashlight is being used.")]
+        private InteractableObject interactableObject;
+
+        private Battery battery;
+
+        [SerializeField]
+        [Tooltip("How much charge the battery loses per second when it is being used.")]
+        private float batteryDischargeRate = 4;
 
         /// <summary>
         /// Spread angle of flashlight.
@@ -75,15 +90,31 @@ namespace HubTutorial
         /// <summary>
         /// Is the light currently turned on.
         /// </summary>
-        public bool IsLightOn
+        public bool IsLightOn { get; set; }
+
+        private void OnEnable()
         {
-            get;
-            set;
+            battery = GetComponent<Battery>();
+            if (battery != null)
+            {
+                battery.BatteryEmpty += OnBatteryEmpty;
+            }
+
+            // TODO Chapter 6: Initially turn light off and set initial spread angle.
+
+            if (interactableObject != null)
+            {
+                interactableObject.InteractableObjectUsed += OnStartUsing;
+            }
         }
 
-        protected virtual void Awake()
+
+        private void OnDisable()
         {
-            // TODO Chapter 6: Initially turn light off and set initial spread angle.
+            if (interactableObject != null)
+            {
+                interactableObject.InteractableObjectUsed -= OnStartUsing;
+            }
         }
 
         /// <summary>
@@ -92,11 +123,13 @@ namespace HubTutorial
         /// <param name="spreadAngle">New angle to set</param>
         public void ChangeSpreadAngle(float spreadAngle)
         {
-            // TODO Chapter 6: Set the new spread angle of the light and broadcast new value.
+            // TODO Chapter 6: Set the new spread angle of the light and invoke tha associated event.
         }
 
-        /// <inheritdoc />
-        public override void StartUsing(VRTK_InteractUse currentUsingObject = null)
+        /// <summary>
+        /// Called when the <see cref="InteractableObject"/> starts being used.
+        /// </summary>
+        private void OnStartUsing(object sender, InteractableObjectEventArgs e)
         {
             // TODO Chapter 6: Toggle the light when object is used.
         }
@@ -115,7 +148,37 @@ namespace HubTutorial
         /// <param name="state">New state to be set</param>
         public void SetLightState(bool state)
         {
-            // TODO Chapter 6: Set the new state of the light and broadcast the new state.
+            if (state && CanTurnOn() == false)
+            {
+                return;
+            }
+
+            // TODO Chapter 6: Set the new state of the light and invoke tha associated event.
+        }
+
+        private bool CanTurnOn()
+        {
+            return battery != null && battery.CurrentCharge > 0;
+        }
+
+        private void OnBatteryEmpty(object sender, Battery.BatteryEventArgs e)
+        {
+            SetLightState(false);
+        }
+
+        private void Update()
+        {
+            ConsumeBattery();
+        }
+
+        private void ConsumeBattery()
+        {
+            if (battery == null || IsLightOn == false)
+            {
+                return;
+            }
+
+            battery.DishargeBattery(batteryDischargeRate * Time.deltaTime);
         }
     }
 }

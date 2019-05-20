@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3758f8f58fdef43803eb9be1df0608, type: 3}
+  m_Name: PhotonServerSettings
+  m_EditorClassIdentifier: 
+  AppID: 
+  VoiceAppID: 
+  ChatAppID: 
+  HostType: 0
+  PreferredRegion: 0
+  EnabledRegions: -1
+  Protocol: 0
+  ServerAddress: 
+  ServerPort: 5055
+  VoiceServerPort: 5055
+  JoinLobby: 0
+  EnableLobbyStatistics: 0
+  PunLogging: 0
+  NetworkLogging: 1
+  RunInBackground: 1
+  RpcList:
+  - ApplyMaterial
+  - ChangeContentOnClients
+  - Chat
+  - DataReceived
+  - DestroyFromContextMenu
+  - DestroyRemote
+  - DestroyRpc
+  - DoLoadApp
+  - DoLoadScene
+  - EmitCallRemotely
+  - ForceReset
+  - HandleGrab
+  - HandleTeleport
+  - HandleTouch
+  - HandleUngrab
+  - HandleUntouch
+  - HandleUnuse
+  - HandleUse
+  - HideController
+  - InitializeStroke
+  - InstantiateRpc
+  - NetworkChangeColor
+  - PauseOnClients
+  - PDFPageChanged
+  - PickupItemInit
+  - PlayerNameChanged
+  - PlayOnClients
+  - PunPickup
+  - PunPickupSimple
+  - PunRespawn
+  - ReleasePicture
+  - RemoteSyncViewIds
+  - ReplicateEdgePositions
+  - RequestForPickupItems
+  - RequestForPickupTimes
+  - RequestSceneLoad
+  - RPCCloneTouchedGameObject
+  - RPCSetGameObjectGravity
+  - RPCSetObjectAlignUpright
+  - RPCSetObjectPositionLock
+  - SelectColor
+  - SetActiveNetworked
+  - SetHideDisplayOnClients
+  - SetLoopingOnClients
+  - SetMaterial
+  - SetShowOutputNodeOnClients
+  - SetTimeOnClients
+  - SetVolumeOnClients
+  - SharePhotonIDs
+  - ShowController
+  - SnapObjectOnClients
+  - SnapOnRemote
+  - SpawnPicture
+  - SpawnStrokeOnNetwork
+  - StopClientStopwatch
+  - UnsnapObjectOnClients
+  - UnsnapOnRemote
+  - UpdateTimeOnClients
+  - UpdateValueOnClients
+  - ApplyUrl
+  - FireEventNetworked
+  - PopupThrowableProduct
+  - RemoteChangeFollowTransform
+  - RemoteChangeUrl
+  - RemoteFollowtransformChanged
+  - SyncKeyboard
+  - ChangeDirectionNetworked
+  - ChangedStateNetworked
+  - DoGreeting
+  - SetNewDestination
+  - UpdateClientsTimeZoneChanged
+  - RPCResetSpawnPile
+  - RPCSetSpawnableAmount
+  DisableAutoOpenWizard: 1
