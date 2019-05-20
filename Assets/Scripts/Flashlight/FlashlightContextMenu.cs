@@ -1,10 +1,9 @@
-﻿using Innoactive.Hub.Settings;
-using Innoactive.Hub.UI;
+﻿using Innoactive.Hub.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Extension of the context actions for the flashlight tool.
@@ -40,10 +39,30 @@ namespace HubTutorial
         /// <returns>List of buttons to add</returns>
         public List<IMenuItem> ProvideContextMenuActions()
         {
+         ContextMenuItemDesign design = new ContextMenuItemDesign();
+
             List<IMenuItem> buttons = new List<IMenuItem>();
 
             // TODO Chapter 7: Create and add new buttons to increase and decrease flashlight spread angle.
             // using default design defined in the HubSettings and the icons which can be found in the resources folder.
+
+            buttons.Add(new MenuItem(
+                new ContextMenuIcon("Icons/increase-flashlight-cone-context-icon", "Increase Angle"),
+                design,
+                new MenuButtonBehaviour((controller) =>
+                {
+                    IncreaseSpread(controller);
+                })
+            ));
+
+            buttons.Add(new MenuItem(
+                new ContextMenuIcon("Icons/decrease-flashlight-cone-context-icon", "Decrease Angle"),
+                design,
+                new MenuButtonBehaviour((controller) =>
+                {
+                    DecreaseSpread(controller);
+                })
+            ));
 
             return buttons;
         }
@@ -55,6 +74,7 @@ namespace HubTutorial
         private void DecreaseSpread(VRTK_ControllerEvents controller)
         {
             // TODO Chapter 7: Set new spread angle of flashlight. At least 10.
+            flashlight.ChangeSpreadAngle(Mathf.Max(flashlight.SpreadAngle - 5, 10));
         }
 
         /// <summary>
@@ -64,6 +84,7 @@ namespace HubTutorial
         private void IncreaseSpread(VRTK_ControllerEvents controller)
         {
             // TODO Chapter 7: Set new spread angle of flashlight. At most 120.
+            flashlight.ChangeSpreadAngle(Mathf.Min(flashlight.SpreadAngle + 5, 120));
         }
 
         public int GetPriority()

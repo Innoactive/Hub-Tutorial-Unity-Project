@@ -1,7 +1,7 @@
 ﻿using Innoactive.Hub.Persistence;
 using Innoactive.Hub.Persistence.Unity;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Extension of the persistence config for this tutorial project.
@@ -11,7 +11,10 @@ namespace HubTutorial
         /// <inheritdoc />
         public override void ExtendPerisistenceConfig(PersistenceConfiguration config)
         {
+            config.PropertyTranslators.RegisterTranslator(new BatteryPersistenceTranslator());
+
             // TODO Chapter 10: Register flashlight persistence.
+            config.PropertyTranslators.RegisterTranslator(new FlashlightPersistenceTranslator());
         }
     }
 }

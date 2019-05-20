@@ -4,7 +4,7 @@ using Innoactive.Hub.UI.WindowSystem;
 using UnityEngine;
 using VRTK;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Custom entry to the main menu to teleport to defined positions

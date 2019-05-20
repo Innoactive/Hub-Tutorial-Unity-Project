@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MenuBundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="https://hub.innoactive.de/menubundle"
+            id="Tutorial" extends="Hub">
+
+    <!-- Create and extend default Hub Main Menu. -->
+    <Menu id="MainMenu" extends="Hub.MainMenu">
+        <!-- Add your created Custom Menu to the Main Menu. -->
+        <MenuItem id="CustomMenuLink" extends="Hub.DefaultLink">
+            <Behaviour>
+                <Data key="provider">Innoactive.HubTutorial.CustomLightSetupMenu</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">Light Menu</Data>
+                <Data key="icon">menu/Icons/SpacesIcon</Data>
+            </Content>
+        </MenuItem>
+
+        <!--Chapter 10-->
+        <MenuItem extends="Hub.DefaultButton">
+            <Condition type="Innoactive.Hub.UI.EnvironmentCondition">
+                <Data key="hide-in-environments">TutorialScene2</Data>
+            </Condition>
+            <Behaviour type="Innoactive.Hub.UI.CommandBehaviour">
+                <Data key="command-type">Innoactive.Hub.Commands.NavigationActionCommand</Data>
+                <Data key="action-type">LoadLastRevisionOfUnityScene</Data>
+                <Data key="scene-or-app-id">TutorialScene2</Data>
+                <Data key="auto-save-leaving-space">false</Data>
+                <Data key="is-local-command">true</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">Go to Tutorial 2</Data>
+                <Data key="icon">Icons/icon_2</Data>
+            </Content>
+        </MenuItem>
+
+        <MenuItem extends="Hub.DefaultButton">
+            <Condition type="Innoactive.Hub.UI.EnvironmentCondition">
+                <Data key="hide-in-environments">TutorialScene</Data>
+            </Condition>
+            <Behaviour type="Innoactive.Hub.UI.CommandBehaviour">
+                <Data key="command-type">Innoactive.Hub.Commands.NavigationActionCommand</Data>
+                <Data key="action-type">LoadLastRevisionOfUnityScene</Data>
+                <Data key="scene-or-app-id">TutorialScene</Data>
+                <Data key="auto-save-leaving-space">false</Data>
+                <Data key="is-local-command">true</Data>
+            </Behaviour>
+            <Content>
+                <Data key="text">Go to Tutorial 1</Data>
+                <Data key="icon">Icons/icon_1</Data>
+            </Content>
+        </MenuItem>
+    </Menu>
+
+    <!-- Add your flashlight to the Tools Menu with a thumbnail and make sure it is always placed first. -->
+    <Menu id="ToolsMenu" extends="Hub.ToolsMenu" replaces="Hub.ToolsMenu">
+        <MenuItem id="Flashlight" extends="Hub.DefaultResourceSpawnButton" placeFirst="true">
+            <Data key="Behaviour.resource">Flashlight</Data>
+            <Data key="Content.text">Flashlight</Data>
+            <Data key="Content.icon">FlashlightThumbnail</Data>
+        </MenuItem>
+    </Menu>
+
+
+</MenuBundle>

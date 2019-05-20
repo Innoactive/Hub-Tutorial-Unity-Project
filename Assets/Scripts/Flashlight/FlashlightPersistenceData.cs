@@ -1,7 +1,7 @@
 ﻿using Innoactive.Hub.Persistence;
 using System.Runtime.Serialization;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Persistent data that contains information to re-create a <see cref="Flashlight"/>.
@@ -17,5 +17,9 @@ namespace HubTutorial
         public FlashlightPersistenceData() : base(propertyType) { }
 
         // TODO Chapter 10: Create data fields that need to be persisted.
+        [DataMember(Name = "spread_angle")]
+        public float? SpreadAngle { get; set; }
+        [DataMember(Name = "flashlight_is_on")]
+        public bool? FlashlightIsOn { get; set; }
     }
 }
