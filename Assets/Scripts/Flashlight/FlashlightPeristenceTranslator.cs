@@ -1,6 +1,6 @@
 ﻿using Innoactive.Hub.Persistence.Unity;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Component that translates component representing a <see cref="Flashlight"/>.

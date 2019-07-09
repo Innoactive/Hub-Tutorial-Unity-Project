@@ -3,7 +3,7 @@ using Innoactive.Hub.Commands;
 using Innoactive.Hub.Interaction;
 using UnityEngine;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Networking component enabling networking for the <see cref="Flashlight"/> tool.
@@ -24,44 +24,6 @@ namespace HubTutorial
         /// </summary>
         private bool recursionLockActive = false;
 
-        #region HubCommand
-
-        /// <summary>
-        /// <see cref="HubCommand"/> to change the state (on or off) of the flashlight.
-        /// </summary>
-        [Serializable]
-        public class LightStateChangedCommand : HubCommand
-        {
-            /// <summary>
-            /// State of the flashlight (on or off).
-            /// </summary>
-            public bool LightState;
-
-            /// <summary>
-            /// Reference to the <see cref="Flashlight"/> GameObject.
-            /// </summary>
-            public GameObjectReference FlashlightReference;
-
-            public LightStateChangedCommand() { }
-
-            public LightStateChangedCommand(FlashlightNetworking flashlight, bool lightState)
-            {
-                // TODO Chapter 11: Set public fields accordingly.
-            }
-
-            /// <inheritdoc />
-            public override void Execute(bool isLocal)
-            {
-                // TODO Chapter 11: Implement execution to set new state.
-            }
-
-            private void UpdateTarget(GameObject target)
-            {
-                // TODO Chapter 11: Update the state of your flashlight.
-            }
-        }
-        #endregion
-
         protected override void OnEnable()
         {
             flashlight = GetComponent<Flashlight>();
@@ -81,7 +43,7 @@ namespace HubTutorial
         /// <param name="args">Arguments which hold information about the current spread angle</param>
         private void FlashlightSpreadChanged(object sender, Flashlight.SpreadChangedEventArgs args)
         {
-            // TODO Chapter 11: Change spread angle for all other users using the photon RPC call.
+            // TODO Chapter 11: Change spread angle for all other users using the photonView RPC call.
         }
 
         /// <summary>
@@ -91,13 +53,14 @@ namespace HubTutorial
         /// <param name="args">Arguments which hold information about the current state</param>
         private void FlashlightStateChanged(object sender, Flashlight.LightStateChangedEventArgs args)
         {
-            // TODO Chapter 11: Change state of light for all other users using HubCommand.
+            // TODO Chapter 11: Change state of light for all other users using the photonView RPC.
         }
 
         /// <summary>
         /// Networked method to call <see cref="SetLightState"/>.
         /// </summary>
         /// <param name="lightState">New state of the light</param>
+        [PunRPC]
         private void RemoteChangeLightState(bool lightState)
         {
             // TODO Chapter 11: Implement call to change light state. Keep recursion lock in mind!

@@ -1,7 +1,7 @@
 ﻿using Innoactive.Hub.Persistence;
 using System.Runtime.Serialization;
 
-namespace HubTutorial
+namespace Innoactive.HubTutorial
 {
     /// <summary>
     /// Persistent data that contains information to re-create a <see cref="Flashlight"/>.
