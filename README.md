@@ -345,13 +345,13 @@ The flashlight should be disabled from the beginning and the size/spread angle o
 
 Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _ChargerSnapDropZone_, assign it a _SphereCollider_ with center (0, 0, 0) and radius 0.1 and make it a trigger. Place the SnapDropZone ontop of the table, for example at (-0.5, 0.9, -2). Additionally, assign a _ConditionalSnapDropZone_ component to the object and set Snap Duration to 0.2 and Highlight Always Active to true.
 
-Now you need to add a prefab which is shown as highlight object for the SnapDropZone. Simply duplicate the _Flashlight_ prefab, rename it to _HighlightFlashlight_ and assign the _FlashlightHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the FlashlightChargerchoose the newly created prefab.
+Now you need to add a prefab which is shown as highlight object for the SnapDropZone. Simply duplicate the _Flashlight_ prefab, rename it to _HighlightFlashlight_ and assign the _FlashlightHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the _FlashlightCharger_ choose the newly created prefab.
 
 Finally choose colors for the both highlighting (blue) and valid highlighting (green) with transparancy. Run the application and see what happens when you grab the flashlight, move it close to the SnapDropZone and release it when marked as valid.
 
 At this point, the SnapDropZone accepts all kind of objects, including pencils and other tools. In order to restrict it, add a _HasLabelsConditionComponent_ and add "Flashlight" to the expected labels. Now the SnapDropZone will only accept objects with a _Labeled_ Component containing the given "Flashlight" tag. Make sure to add the _Labeled_ Component to your flashlight prefab as well and add "Flashlight" to the Labels List.
 
-Optionally a _IsWithinAngleConditionComponent_ can be added to the FlashlightChargerin order to force the user to put the objects in an approximatelly correct orientation. 45 is a good value for the angle threshold.
+Optionally a _IsWithinAngleConditionComponent_ can be added to the _FlashlightCharger_ in order to force the user to put the objects in an approximatelly correct orientation. 45 is a good value for the angle threshold.
 
 **Note:** Custom conditions can be easily created by implementing the _ICondition_\<T> interface. For more information, checkout the [_Conditions Documentation_](http://docs.hub.innoactive.de/v4.0.0/articles/conditions.html).
 
