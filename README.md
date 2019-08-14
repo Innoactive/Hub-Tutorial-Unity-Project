@@ -184,6 +184,8 @@ After the Hub SDK as well as Steam VR is imported we take care of the following 
 Go to the Unity PlayerSettings and change the Api Compatibility Level in Other Settings from _.Net 2.0 Subset_ to _.Net 4.0_.
 The error message can look a little different on your machine, thus we recommend to read it and use the suggested Api settings.
 
+**Note:** For newer Unity versions (2018.3+), it is required to add the *OpenVR* package from the Unity Package Manager in order to get SteamVR running.
+
 **Note:** After compiling another error _might_ pop-up:
 
 ```error CS2001: Source file `Assets/Extensions/hub-sdk/Extensions/VRTK/Assets/VRTK/Examples/ExampleResources/SceneResources/[001 - Interactions] ControllerEvents/Scripts/VRTKExample_ControllerEventsDelegateListeners.cs' could not be found.``` 
@@ -264,21 +266,21 @@ After you spawned the pen you can grab it by touching it (it will get highlighte
 
 Using an object is as simple as grabbing one. If you released the pen, grab it again and use the Trigger to draw some lines in your virtual space. You will draw as long as you keep the Trigger pressed.
 
-Additionally to the Main Menu, which is a global menu, exists the object-based _Context Menu_. You can open an object's Context Menu by either touching or grabbing it and then touching the Trackpad of your controller. Besides default features like deleting and enable gravity you can add object specific behavior. For example you can change the pen's color, so newly drawn strokes will have a different color. Try it by deleting a previously drawn line and then drawing a new one in another color.
+In addition to the Main Menu, which is a global menu, there is the object-based _Context Menu_. You can open an object's Context Menu by either touching or grabbing it and then touching the Trackpad of your controller. Besides default features like deleting and enable gravity you can add object specific behavior. For example you can change the pen's color, so newly drawn strokes will have a different color. Try it by deleting a previously drawn line and then drawing a new one in another color.
 
-Just play around with the menu and spawned objects and see what you can do with the different things. For instance spawn a basic shape from the objects menu, change it's color and physics and use bi-manual scaling to make it bigger and smaller (grab it with both hands and move the hands apart). Furthermore, you can change your own representation in VR by changing your avatar in the Avatar menu section. It is also possible to create your own avatar which is a more advanced topic and will not be covered in this tutorial.
+Just play around with the menu and spawned objects and see what you can do with the different things. For instance, spawn a basic shape from the objects menu, change it's color and physics and use bi-manual scaling to make it bigger and smaller (grab it with both hands and move the hands apart). Furthermore, you can change your own representation in VR by changing your avatar in the Avatar menu section. It is also possible to create your own avatar which is a more advanced topic and will not be covered in this tutorial.
 
 <div style="page-break-after: always;"></div>
 
 ## <a name="Chapter4"></a>**Chapter 4** Get around your scene
 
-As briefly mentioned in the previous chapter using the teleporter is your way to get around the scene. But often it is necessary to restrict the user from going everywhere in the scene.
+As briefly mentioned in the previous chapter, using the teleporter is your way to get around the scene. But often it is necessary to restrict the user from going everywhere in the scene.
 
-Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand ontop of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements. When copying a string into the field it may happen that an empty space is added at the end. This will cause issues because the Policy List will not handle that properly and recognizes the entered string as different than the one you actually want to ignore. So make sure there is no empty space added.
+Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We obviously do not want the user to stand on top of the table or the wall, so we want to restrict these areas. Add the script _DoNotAllowTeleportingHere_ to both GameObjects to mark them. In VRTK's _Policy List_ for teleport targets (```[VRTK_Setup] > [VRTK_Scripts] > PlayArea > Script VRTK_PolicyList```) you can see that the Check List as well as the checked elements are already set up to disallow teleporting on every object with the just added script. You can of course change that list and add new elements. When copying a string into the field it may happen that an empty space is added at the end. This will cause issues because the Policy List will not handle that properly and recognizes the entered string as different than the one you actually want to ignore. So make sure there is no empty space added.
 
-Sometimes instead of just restricting a user to access a certain area it is needed to hide what they can see. Keep in mind that people in Virtual Reality can walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just (physically) walks right through it they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this we simply fade out the user's view.
+Sometimes, instead of just restricting a user from accessing a certain area, it is required to hide what they can see. Keep in mind that people in Virtual Reality can physically walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just physically moves his head, he they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this, we simply fade out the user's view.
 
-Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_ place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_. This is important! For reference, we placed our _Prohibited Zone_ to (-3.5, 1.5, 0) and scaled it to (0.5, 3, 8). Additionally, add the _FadeOutViewInCollider_ script to the prohibited zone and change its layer to _IgnoreRaycast_.
+Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_, place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_ (to prevent it from influencing with the physics simulation). For reference, we placed our _Prohibited Zone_ to (-3.5, 1.5, 0) and scaled it to (0.5, 3, 8). Additionally, add the _FadeOutViewInCollider_ script to the prohibited zone and change its layer to _IgnoreRaycast_.
 
 Now make usage of VRTK logic to be aware when the user is in the prohibited zone. Create a new GameObject under ```[VRTK_Setup] > [VRTK_Scripts]``` called _HeadsetCollisionFade_. And add the following components with the specific settings:
 
@@ -343,15 +345,15 @@ The flashlight should be disabled from the beginning and the size/spread angle o
 
 ### Add a SnapDropZone
 
-Next create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _ChargerSnapDropZone_, assign it a _SphereCollider_ with center (0, 0, 0) and radius 0.1 and make it a trigger. Place the SnapDropZone ontop of the table, for example at (-0.5, 0.9, -2). Additionally, assign a _ConditionalSnapDropZone_ component to the object and set Snap Duration to 0.2 and Highlight Always Active to true.
+Next, create a _SnapDropZone_ to allow the object to be snapped to a certain position. Create a new empty GameObject and call it _ChargerSnapDropZone_, assign it a _SphereCollider_ with center (0, 0, 0) and radius 0.1 and make it a trigger. Place the SnapDropZone on top of the table, for example at (-0.5, 0.9, -2). Additionally, assign a _ConditionalSnapDropZone_ component to the object, set Snap Duration to 0.2 and Highlight Always Active to true.
 
-Now you need to add a prefab which is shown as highlight object for the SnapDropZone. Simply duplicate the _Flashlight_ prefab, rename it to _HighlightFlashlight_ and assign the _FlashlightHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the _FlashlightCharger_ choose the newly created prefab.
+Now you need to add a prefab which is shown as highlight object for the SnapDropZone. Simply duplicate the _Flashlight_ prefab, rename it to _HighlightFlashlight_ and assign the _FlashlightHighlight_ material which is just a transparent material without any textures. In the Highlight Object Prefab of the _FlashlightCharger_, choose the newly created prefab.
 
-Finally choose colors for the both highlighting (blue) and valid highlighting (green) with transparancy. Run the application and see what happens when you grab the flashlight, move it close to the SnapDropZone and release it when marked as valid.
+Finally, choose colors for the both highlighting (blue) and valid highlighting (green) with transparency. Run the application and see what happens when you grab the flashlight, move it close to the SnapDropZone and release it when marked as valid.
 
 At this point, the SnapDropZone accepts all kind of objects, including pencils and other tools. In order to restrict it, add a _HasLabelsConditionComponent_ and add "Flashlight" to the expected labels. Now the SnapDropZone will only accept objects with a _Labeled_ Component containing the given "Flashlight" tag. Make sure to add the _Labeled_ Component to your flashlight prefab as well and add "Flashlight" to the Labels List.
 
-Optionally a _IsWithinAngleConditionComponent_ can be added to the _FlashlightCharger_ in order to force the user to put the objects in an approximatelly correct orientation. 45 is a good value for the angle threshold.
+Optionally, a _IsWithinAngleConditionComponent_ can be added to the _FlashlightCharger_ in order to force the user to put the objects in an approximatelly correct orientation. 45 is a good value for the angle threshold.
 
 **Note:** Custom conditions can be easily created by implementing the _ICondition_\<T> interface. For more information, checkout the [_Conditions Documentation_](http://docs.hub.innoactive.de/v4.0.0/articles/conditions.html).
 
@@ -365,7 +367,7 @@ In order to make the charger look better, add the _FlashlightRecharger_ mesh fro
 
 ## <a name="Chapter7"></a>**Chapter 7** Context menu
 
-As you probably noticed you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based [_ContextMenu_](http://docs.hub.innoactive.de/v4.0.0/articles/context-menu.html).
+As you probably noticed, you can turn the flashlight on and off but not adjust the spread angle or even delete the flashlight. That's why this chapter covers the implementation and extension of the object-based [_ContextMenu_](http://docs.hub.innoactive.de/v4.0.0/articles/context-menu.html).
 
 First give the default context actions a look and add the _DefaultContextActions_ component to your flashlight. This will also add the _ContextMenuHandler_ automatically. Disable Use, Scale, Clone and Align, which we do not need. You will see now that those default actions are shown in the context menu of the flashlight.
 
@@ -409,13 +411,11 @@ Run your application and try out your new tool spawned from the Tools section of
 
 ### Custom menus
 
-You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which change the light settings of the scene, switching between day and night. Make sure to add the LightSetupController prefab to your scene. You can access the _LightSetupController_ script by calling ```LightSetupController.Instance_```. Open the _CustomLightSetupMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for [**Chapter 8**](#Chapter8) and ignore the ones from [**Chapter 12**](#Chapter12) which we will tackled later on to extend this feature.
+You can customize your menu even further by adding your own submenus to it. The goal is to have a submenu of the main menu that has multiple buttons which change the light settings of the scene, switching between day and night. Make sure to add the LightSetupController prefab to your scene, and delete the original Directional Light to avoid interferences with the new lighting. You can access the _LightSetupController_ script by calling ```LightSetupController.Instance_```. Open the _CustomLightSetupMenu_ script which already inherits from _Menu_ and _IMenuProvider_. Implement the ToDo's for [**Chapter 8**](#Chapter8) and ignore the ones from [**Chapter 12**](#Chapter12) which we will tackled later on to extend this feature.
 
 To add new buttons to the custom menu use the _Menu.Add()_ method with _ButtonItem_ as _MenuItem_. For the Icon simply use the _ResourceIcon_ with a descriptive text ("Day"/"Night") and the icons from ```Assets > Resources > Icons > day/night-icon``` and for the action make use of the _SetLight_ method.
 
 The logic of the menu is now done but you will not see it in the application yet. Jump back to the XML description of the menu and add a new _MenuItem_ to your _MainMenu_. Provide an Id for the MenuItem which is actually a _DefaultLink_. A DefaultLink references a Menu and includes it. See the structure of the link in the _HubDefaultMenu_. For the Behaviour you need the provider which points to the Menu class (including its namespace) you want to add and for the _Content_ add a text (in our case "Light Menu") and an icon where you can simply use the spaces icon (```... > menu > Icons > SpacesIcon```).
-
-Delete the original Directional Light to avoid interferences with the new lighting.
 
 Run the application and open your menu. You will see a new entry at the end of the list. Navigate to it and make use of the two newly added menu functions.
 
@@ -427,13 +427,16 @@ Run the application and open your menu. You will see a new entry at the end of t
 
 This chapter is all about setting up your _Innoactive Hub_ Backend and how to make use of it.
 
-_Note:_ Get your client credentials from your _Innoactive_ contact person or you will not have access to the _Web Management Console_.
+**Note:** Get your client credentials from your _Innoactive_ contact person or you will not have access to the _Web Management Console_.
 
 There are two ways to configure your client settings, the settings you need to make to have actual access. 
 
-First and recommended option is to open up the SDK Setup Wizard again and fill in the _Hub Client Credentials_, if not already done in Chapter 1. You get the Hub URL, the Client Id as well as the Secret from your _Innoactive_ contact person. The values you enter here will be copied into the client config file (```Project > Config > client-config.json```) which is also the second option. You can just include everything in this file directly without making use of the Wizard.
+The first and recommended option is to open up the SDK Setup Wizard again and fill in the _Hub Client Credentials_, if not already done in Chapter 1. You get the Hub URL, the Client Id as well as the Secret from your _Innoactive_ contact person. The values you enter here will be copied into the client config file (```Project > Config > client-config.json```) which is also the second option. You can just include everything in this file directly without using the Wizard.
 
 Enable the _[HUB-LOGIN-CHECK]_ object in your scene and open up the Hub-Settings in your project. Include your provided reality into the _Editor Reality Id_ field.
+
+**Note:** The authorization with the backend will require loading a new scene, *LoginSceneAuthCode*.
+For this to work, both your tutorial scene and the login scene must be added to your project's build settings.
 
 > A reality is one _unique_ version of your application. You can see realities as parallel universes. While in Reality A you have three pens, a flashlight and some drawings floating around, in reality B you only moved your box right next to the wall and have a measuring tape to check the distance to your table. Both realities build upon the same basic scene/application and exist next to each other but the states of the objects are different. This allows multiple people to work within the same application without interfering with each other. Realities do not know each other and within one application you cannot jump between realities!
 
@@ -454,25 +457,25 @@ You probably remember that we already added such an object in Chapter two, the _
 
 ### Save and load
 
-Loading is done by the _SceneNavigationManager_ which has actions to load a certain Space Version by Id but typically the last saved Space Version is loaded. While being in multi-user every user in the same room loads the same Space Version.
+Loading is done by the _SceneNavigationManager_ which has actions to load a certain Space Version by Id but typically the last saved Space Version is loaded. While being in multi-user, every user in the same room loads the same Space Version.
 
-So far for the theory, in practice the goal of this chapter is to first save a Space Version and then load it again via the menu. Additionally, the flashlight from [**Chapter 6**](#Chapter6) will be persisted and you will learn how to switch between scenes without losing the changes made before.
+The goal of this chapter is to first save a Space Version and then load it again via the menu. Additionally, the flashlight from [**Chapter 6**](#Chapter6) will be persisted and you will learn how to switch between scenes without losing the changes made before.
 
-Let's start by spawning some tools and moving them around. Then open the menu and save your Space Version. You can load the Space Version by selecting ```Load Previous State```, chosing a saved state to go back to and putting the spawned space sphere over your head.
+Let's start by spawning some tools and moving them around. Then open the menu and save your Space Version. You can load the Space Version by selecting ```Load Previous State```, choosing a saved state to go back to and putting the spawned space sphere over your head.
 
 ### Make tools persistent
 
-As you might have seen your flashlight tool keeps its position but not its last set state and spread angle. This might not be a huge issue for the flashlight but for more complex objects/tools or for colored things it can be vital.
+As you may have noticed, your flashlight tool keeps its position but not its last set state and spread angle. This might not be a huge issue for the flashlight, but for more complex objects/tools or for colored things it can be vital.
 
-To make a tool persistent it needs its own _PropertyData_ as well as _Translator_. Open the _FlashlightPersistenceData_ script which already inherits from _PersistentProperty.PropData_ and carries the _DataContract-Attribute_. In here you actually just have to create nullable types (by adding a ? after the type like _Color?_) that you want to persist within your flashlight, so your state and your spread angle. Both get the _DataMember-Attribute_ with unique names. As you can see _PropertyData_ is more or less a container which holds the information you want to persist.
+To make a tool persistent, it needs its own _PropertyData_ as well as _Translator_. Open the _FlashlightPersistenceData_ script which already inherits from _PersistentProperty.PropData_ and carries the _DataContract-Attribute_. In here you actually just have to create nullable types (by adding a ? after the type like _Color?_) that you want to persist within your flashlight, so your state and your spread angle. Both get the _DataMember-Attribute_ with unique names. As you can see _PropertyData_ is more or less a container which holds the information you want to persist.
 
 The translator does the actual work. Edit your _FlashlightPersistenceTranslator_ which in this case is a _SingleComponentPropertyTranslator_ with the _FlashlightPropertyData_ as well as the _Flashlight_ component. Start by returning the correct _PropertyTypeName_ which is defined in the data.
 
 The other two ToDo's are, simply said, one to get the data from the object and save it (_UpdatePropertyFromComponent_) and the other to load the object data which was saved before (_UpdateComponentFromProperty_). So in _UpdatePropertyFromComponent_ set the property data to the components current values and in _UpdateComponentFromProperty_ set the current values to the saved property data.
 
-This now handles the storing and loading of data in general but will not be called by the _PersistenceManager_ yet. We first have to register the translator. Open the _TutorialPersistenceExtension_ script which inherits from _PersistenceConfigExtension_ and add the _FlashlightPersistenceTranslator_ to the config by registering it. You need to register every tool and object you want to persist and which required a _PersistenceTranslator_ wihtin the extension.
+This now handles the storing and loading of data in general but will not be called by the _PersistenceManager_ yet. We first have to register the translator. Open the _TutorialPersistenceExtension_ script which inherits from _PersistenceConfigExtension_ and add the _FlashlightPersistenceTranslator_ to the config by registering it. You need to register every tool and object you want to persist and which required a _PersistenceTranslator_ within the extension.
 
-The last step to have your flashlight persisted is to add the  _TutorialPersistenceExtention_ component to some object in your tutorial scene (as well as in the Login scene).
+The last step to have your flashlight persisted is to add the  _TutorialPersistenceExtension_ component to some object in your tutorial scene (as well as in the Login scene).
 
 **Solution:** Find the implemented scripts and the updated scene in _ChapterSolutions/Chapter-10.1_Persistence_Tools.unitypackage_.
 
@@ -491,9 +494,9 @@ The last thing covered in this chapter is how to switch scenes. You can change s
 Up to now everything so far was in offline mode, so not networked and not intended for multiple users in the same application. Let's switch to multi-user sessions!
 
 
-In this tutorial three different ways of implementing networked methods are covered, event based _RPC_, continuous _StateSynchronization_ and _HubCommands_. Every method has its own use case and is shown in this chapter.
+In this tutorial, three different ways of implementing networked methods are covered: event based _RPC_, continuous _StateSynchronization_ and _HubCommands_. Every method has its own use case and is shown in this chapter.
 
-The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabilities. To get started with multi-user open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_) or use the photon credentials you were given. Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
+The _Innoactive Hub SDK_ is built upon _Photon_ for networking and multi-user capabilities. To get started with multi-user, open your _photon-config.json_ in the project's _Config_ folder where hosting is currently set to _OfflineMode_. Change it to either _SelfHosted_ or _PhotonCloud_ depending on your preferences and update your _appId_ (and _serverAddress_ if you prefer _SelfHosted_) or use the photon credentials you were given. Save the config, find a friend and start your application to meet in the virtual world. You probably notice that the wooden box is not networked and moving it will only be done for the local user while objects spawned from the menu are automatically networked.
 
 Adjusting an object to make it multi-user ready is quite simple. Add an _InteractableObjectNetworking_ component to the wooden box which automatically attaches a _PhotonView_. This will synchronize the transform between all users but the snapping to the drop zone is still missing. Continue by adding a _SnapDropZoneNetworked_ component to the _ChargerSnapDropZone_, run the application and see how other people can manipulate objects within the same scene.
 
@@ -519,7 +522,7 @@ In order to get the Battery networked as well, add the _BatteryNetworking_ compo
 
 ### LightSetup networking with Hub Commands
 
-Currently the light setup change is not networked.
+Currently, the light setup change is not networked.
 
 Open the _LightSetupCommand_ class which inherits from _HubCommand_ and go through its TODO's. A _HubCommand_ is basically a command which can be configured and then executed for every user.
 
@@ -543,7 +546,7 @@ You might not like the current color scheme or it does not fit your company's st
 
 ## <a name="Chapter13"></a>**Chapter 13** Customize controllers
 
-Currently when you start an application, controllers with default behavior (default _Innoactive Hub_ configuration) are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. In some cases you might not want to show a menu or allow only the trigger to be used. Maybe you want to change the appearance of the teleporter or even want your left controller to be different from your right one.
+Currently, when you start an application, controllers with default behavior (default _Innoactive Hub_ configuration) are loaded. This includes how buttons are mapped, how you grab things and how the teleporter works along with a lot of other settings. In some cases you might not want to show a menu or allow only the trigger to be used. Maybe you want to change the appearance of the teleporter or even want your left controller to be different from your right one.
 
 In this chapter you will learn how to change the appearance of your teleporter to the default _VRTK_ look.
 
