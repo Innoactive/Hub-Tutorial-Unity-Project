@@ -215,25 +215,25 @@ Since we are developing a Virtual Reality application based on _VRTK_ start by r
 Next we setup the scene so we can use all features of the _Innoactive Hub_. We took over this process for you to make sure you have everything you need and are good to go. Clicking ```Innoactive > Hub > Setup > Setup Current Scene as Hub Scene``` populates your scene with a bunch of GameObjects which we briefly explain.
 
 ### Components
-**[HUB-BOOTSTRAP]** is responsible for scene initialization - handles setup of persistence and multi-user, and loading of the correct space (especially for multi-user sessions).
+* **[HUB-BOOTSTRAP]** is responsible for scene initialization - handles setup of persistence and multi-user, and loading of the correct space (especially for multi-user sessions).
 
-**[HUB-MULTIUSER]** is responsible for managing multi-user sessions.
+* **[HUB-MULTIUSER]** is responsible for managing multi-user sessions.
 
-**[HUB-PERSISTENCE]** handles storing and restoring scene states (i.e. saving/loading).
+* **[HUB-PERSISTENCE]** handles storing and restoring scene states (i.e. saving/loading).
 
-**[HUB-LOGIN_CHECK]** ensures that a connection to the _Innoactive Hub_ backend is possible. If not, it will redirect to a login scene.
+* **[HUB-LOGIN_CHECK]** ensures that a connection to the _Innoactive Hub_ backend is possible. If not, it will redirect to a login scene.
 
-**[HUB-DEBUG_UI]** provides a Debug Info overlay when pressing _Ctrl+G_.
+* **[HUB-DEBUG_UI]** provides a Debug Info overlay when pressing _Ctrl+G_.
 
-**[HUB-BUG_LOGGING]** Allows to save Debug Logs when pressing _Alt+B_.
+* **[HUB-BUG_LOGGING]** Allows to save Debug Logs when pressing _Alt+B_.
 
-**[HUB-VR-LAUNCHER-CLIENT]** allows connecting to the _Innoactive Hub Launcher_, allowing to switch to different VR applications.
+* **[HUB-VR-LAUNCHER-CLIENT]** allows connecting to the _Innoactive Hub Launcher_, allowing to switch to different VR applications.
 
-**[HUB-PLAYER-SETUP-MANAGER]** is responsible for setting up the cameras. This includes but is not limited to disabling the HMD if so selected in the player-config.json as well as enabling / disabling the high-resolution spectator view (also configured via the player-config.json) which shows an interpolated first person view in the native resolution of the attached monitor.
+* **[HUB-PLAYER-SETUP-MANAGER]** is responsible for setting up the cameras. This includes but is not limited to disabling the HMD if so selected in the player-config.json as well as enabling / disabling the high-resolution spectator view (also configured via the player-config.json) which shows an interpolated first person view in the native resolution of the attached monitor.
 
-**[HUB-MENU-SETUP]** allows configuration of the menu to use, and also allows configuring the user menu.
+* **[HUB-MENU-SETUP]** allows configuration of the menu to use, and also allows configuring the user menu.
 
-**[VRTK_Setup]** manages the run-time setup and configuration of VR cameras and interactions.
+* **[VRTK_Setup]** manages the run-time setup and configuration of VR cameras and interactions.
 
 <br>
 
@@ -280,7 +280,7 @@ Start by dragging the _Table_ and the _BrickWall_ prefabs into your scene. We ob
 
 Sometimes, instead of just restricting a user from accessing a certain area, it is required to hide what they can see. Keep in mind that people in Virtual Reality can physically walk as well as teleport. If the user teleports right in front of a wall of an apartment in the 30th floor and then just physically moves his head, he they might be able to see something you, as a developer, do not want them to see, like your skybox without a floor underneath. To avoid this, we simply fade out the user's view.
 
-Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_, place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_ (to prevent it from influencing with the physics simulation). For reference, we placed our _Prohibited Zone_ to (-3.5, 1.5, 0) and scaled it to (0.5, 3, 8). Additionally, add the _FadeOutViewInCollider_ script to the prohibited zone and change its layer to _IgnoreRaycast_.
+Let's create such prohibited zone right behind the previously added wall. Create a GameObject called _Prohibited Zone_, place it somewhere behind the wall and add a _BoxCollider_ component to it. Scale the Collider so it at least covers the whole area behind the wall and make sure the Collider is a _Trigger_ (to prevent it from influencing with the physics simulation). For reference, we placed our _Prohibited Zone_ to (-3.5, 1.5, 0) and scaled it to (0.5, 3, 8). Additionally, add the _FadeoutViewInCollider_ script to the prohibited zone and change its layer to _IgnoreRaycast_.
 
 Now make usage of VRTK logic to be aware when the user is in the prohibited zone. Create a new GameObject under ```[VRTK_Setup] > [VRTK_Scripts]``` called _HeadsetCollisionFade_. And add the following components with the specific settings:
 
@@ -325,11 +325,11 @@ Finally rename the object to _InteractableWoodenBox_ and save it as a prefab for
 
 ## <a name="Chapter6"></a>**Chapter 6** Flashlight: Create a custom tool
 
-In [**Chapter 3**](#Chapter3) you learned how to use the pen and some other tools which are already included in the _Innoactive Hub SDK_. In this chapter you will develop your first custom tool - a flashlight. This will require your first lines of code.
+In [**Chapter 3**](#Chapter3) you learned how to use the pen and some other tools which are already included in the _Innoactive Hub SDK_. In this chapter you will develop your first custom tool: a flashlight. This is the first programming task in this tutorial.
 
 Drop the already prepared flashlight prefab into the scene and make it interactable, just like in the previous chapter. Add _Rigidbody_, _InteractableObject_ and _VRTK_FixedJointGrabAttach_, but instead of _VRTK_AxisScaleGrabAction_ you can add _VRTK_SwapControllerGrabAction_, since we don't need scaling but want to swap between the grabbing hands. This time you also don't need _VRTK_InteractHaptics_ necessarily.
 
-Add a SpotLight component to the Flashlight, position it properly at the tip of the flashlight and change the color to make it a slight yellow. Run the application, grab the light and move around. You just created your first _stupid_ tool.
+Add a SpotLight object to the Flashlight, position it properly at the tip of the flashlight and change the color to make it a slight yellow. Run the application, grab the light and move around. You just created your first _stupid_ tool.
 
 Now add some logic.
 
@@ -467,7 +467,7 @@ Let's start by spawning some tools and moving them around. Then open the menu an
 
 As you may have noticed, your flashlight tool keeps its position but not its last set state and spread angle. This might not be a huge issue for the flashlight, but for more complex objects/tools or for colored things it can be vital.
 
-To make a tool persistent, it needs its own _PropertyData_ as well as _Translator_. Open the _FlashlightPersistenceData_ script which already inherits from _PersistentProperty.PropData_ and carries the _DataContract-Attribute_. In here you actually just have to create nullable types (by adding a ? after the type like _Color?_) that you want to persist within your flashlight, so your state and your spread angle. Both get the _DataMember-Attribute_ with unique names. As you can see _PropertyData_ is more or less a container which holds the information you want to persist.
+To make a tool persistent, it needs its own _PropertyData_ as well as _Translator_. Open the _FlashlightPersistenceData_ script which already inherits from _PersistentProperty.PropData_ and carries the _DataContract-Attribute_. In here you actually just have to create nullable types (by adding a ? after the type like _Color?_) that you want to persist within your flashlight, so your state and your spread angle. You have to mark both properties with _DataMemberAttribute_ in the same way as in the BatteryPersistenceData. Make data members's names unique. As you can see _PropertyData_ is more or less a container which holds the information you want to persist.
 
 The translator does the actual work. Edit your _FlashlightPersistenceTranslator_ which in this case is a _SingleComponentPropertyTranslator_ with the _FlashlightPropertyData_ as well as the _Flashlight_ component. Start by returning the correct _PropertyTypeName_ which is defined in the data.
 
